@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import {FC} from "react";
 
 type State = {
   state: {
@@ -6,7 +7,7 @@ type State = {
   }
 }
 
-export function PageNotFound(): JSX.Element {
+const PageNotFound: FC = () => {
   const navigate = useNavigate()
   const { state }: State = useLocation()
 
@@ -25,3 +26,4 @@ export function PageNotFound(): JSX.Element {
     </section>
   )
 }
+export default PageNotFound;
