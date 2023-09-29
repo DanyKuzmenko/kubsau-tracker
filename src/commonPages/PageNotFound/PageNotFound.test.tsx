@@ -1,13 +1,16 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import PageNotFound from './PageNotFound';
+import PageNotFound from 'commonPages/PageNotFound/PageNotFound';
+import { checkText } from 'utils/tests/checkFunctions';
 
 test('PageNotFound | Render', (): void => {
   render(
     <MemoryRouter>
       <PageNotFound />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
-  expect(screen.getByText(/Данная страница не найдена/i)).toBeInTheDocument();
+  const pageElements: RegExp[] = [/Данная страница не найдена/i];
+
+  checkText(pageElements);
 });
