@@ -14,7 +14,7 @@ const PageNotFound: FC = () => {
   let previousPageNavigateAction;
 
   if (state?.prevPageLink) {
-    previousPageNavigateAction = () => navigate(-1);
+    previousPageNavigateAction = () => navigate(state.prevPageLink!);
   } else {
     previousPageNavigateAction = () => navigate('..');
   }
