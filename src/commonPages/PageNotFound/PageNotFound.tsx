@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
-import styles from './PageNotFound.module.scss'
+import styles from './PageNotFound.module.scss';
 
 type State = {
   state: {
-    prevPageLink?: string
-  }
-}
+    prevPageLink?: string;
+  };
+};
 
 const PageNotFound: FC = () => {
   const navigate = useNavigate();
