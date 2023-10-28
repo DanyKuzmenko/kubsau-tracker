@@ -1,0 +1,47 @@
+:root {
+  --font-family-main: "Nunito Sans", serif;
+
+  //COLORS
+
+  --neutral-black-100: #0A0A0A;
+  --neutral-black-90: #424242;
+  --neutral-black-80: #616161;
+  --neutral-black-70: #757575;
+  --neutral-black-60: #9E9E9E;
+  --neutral-black-50: #C2C2C2;
+  --neutral-black-40: #E0E0E0;
+  --neutral-black-30: #EDEDED;
+  --neutral-black-20: #F5F5F5;
+  --neutral-white: #FFFFFF;
+
+  --accent-default: #43813A;
+  --accent-hover: #A3C779;
+  --accent-bg-light: #E7F6F5;
+  --accent-active: #B1CEB4;
+  --focus: #E2DC66;
+
+  --success-default: #37D121;
+  --success-hover: #1CAF07;
+  --success-bg-light: #E7FCDF;
+  --success-stroke: #ADE1A5;
+
+  --warning-main: #F2B30F;
+  --warning-hover: #D18006;
+  --warning-bg: #FFF8EB;
+  --warning-border: #F5DDB9;
+  --warning-active: #95891D;
+  --warning-focus: #FDF8CF;
+
+  --error-main: #E31B1B;
+  --error-hover: #C20D0D;
+  --error-bg: #FFF2F2;
+  --error-border: #E2E6B6;
+  --error-active: #541212;
+  --error-focus: #FFDFDF;
+
+  --info-main: #4464AA;
+  --info-hover: #212327;
+  --info-active: #001793;
+  --info-bg: #EBEEFF;
+  --info-border: #AAB6F4;
+}
