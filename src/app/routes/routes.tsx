@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import  MainLayout  from 'layout/MainLayout';
-import PageNotFound from '../commonPages/PageNotFound/PageNotFound';
+import { PageNotFound } from 'pages/PageNotFound';
+import { MainLayout } from 'pages/MainLayout';
 
 export const routes = {
   login: '/login',
-}
+};
 
 export const browserRoutes = createBrowserRouter([
   {
@@ -14,6 +14,6 @@ export const browserRoutes = createBrowserRouter([
   },
   {
     path: '*',
-    element: <PageNotFound />
-  }
-])
+    element: <PageNotFound />,
+  },
+]);
