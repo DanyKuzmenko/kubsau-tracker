@@ -12,11 +12,10 @@
 .Button:hover {
   transition-timing-function: ease-out;
   transition-duration: 200ms;
-
 }
 .primary {
   background: var(--accent-default-click);
-  color: var(--white)
+  color: var(--white);
 }
 .secondary {
   border: 1px solid var(--accent-default-click);
@@ -52,4 +51,3 @@
   font-size: 18px;
   padding: 14px 44px;
 }
-
