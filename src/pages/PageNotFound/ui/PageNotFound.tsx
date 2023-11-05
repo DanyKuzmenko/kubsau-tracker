@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
+import styles from './PageNotFound.module.scss';
 
 type State = {
   state: {
@@ -20,7 +21,7 @@ const PageNotFound: FC = () => {
   }
 
   return (
-    <section>
+    <section className={styles.page}>
       <h1>Данная страница не найдена</h1>
       <button onClick={previousPageNavigateAction}>Вернуться назад</button>
     </section>

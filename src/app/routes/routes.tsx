@@ -1,4 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
+import MainLayout from 'layout/MainLayout/MainLayout';
+import PageNotFound from 'commonPages/PageNotFound/PageNotFound';
+import { scheduleBrowserRoutes } from 'routes/schedule';
 import { PageNotFound } from 'pages/PageNotFound';
 import { MainLayout } from 'pages/MainLayout';
 
@@ -10,7 +13,7 @@ export const browserRoutes = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-    children: [],
+    children: [...scheduleBrowserRoutes],
   },
   {
     path: '*',
