@@ -10,7 +10,7 @@ test('Schedule | Render', (): void => {
     </MemoryRouter>
   );
 
-  const pageElements: RegExp[] = [/Schedule/i];
+  const pageElements: RegExp[] = [/Нажать 1/i, /Нажать 2/i, /Нажать 3/i];
 
   checkText(pageElements);
 });
