@@ -1,16 +1,16 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import PageNotFound from 'commonPages/PageNotFound/PageNotFound';
 import { checkText } from 'utils/tests/checkFunctions';
+import Header from 'layout/components/Header/Header';
 
-test('PageNotFound | Render', (): void => {
+test('Header | Render', (): void => {
   render(
     <MemoryRouter>
-      <PageNotFound />
+      <Header />
     </MemoryRouter>
   );
 
-  const pageElements: RegExp[] = [/Данная страница не найдена/i];
+  const pageElements: RegExp[] = [/Шапка сайта/i];
 
   checkText(pageElements);
 });
