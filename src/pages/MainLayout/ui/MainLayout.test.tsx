@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { checkText } from 'utils/tests/checkFunctions';
-import MainLayout from 'layout/MainLayout/MainLayout';
+import MainLayout from './MainLayout';
 
 test('MainLayout | Render', (): void => {
   render(

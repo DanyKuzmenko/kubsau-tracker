@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import PageNotFound from 'commonPages/PageNotFound/PageNotFound';
 import { checkText } from 'utils/tests/checkFunctions';
+import PageNotFound from './PageNotFound';
 
 test('PageNotFound | Render', (): void => {
   render(

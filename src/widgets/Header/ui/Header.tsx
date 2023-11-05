@@ -5,4 +5,4 @@ const Header: FC = () => {
   return <header className={styles.header}>Шапка сайта</header>;
 };
 
-export default Header;
+export { Header };

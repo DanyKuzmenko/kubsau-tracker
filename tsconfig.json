@@ -16,12 +16,7 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  },
   "include": [
-    "src"
-  ]
+    "src",
+    "declaration.d.ts"]
 }
