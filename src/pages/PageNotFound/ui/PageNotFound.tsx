@@ -1,5 +1,6 @@
-import { useLocation, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import styles from './PageNotFound.module.scss';
 
 type State = {

@@ -1,52 +1,44 @@
-:root {
-  --font-family-main: 'Nunito Sans', serif;
+//  ===COLORS===
 
-  //COLORS
+//Neutral
+$text_primary_default: #151615;
+$text_secondary_hover: #555855;
+$text_secondary_default: #7e817e;
+$text_tertiary_default: #9da09c;
+$stroke_text_disabled: #e1e1e1;
+$bg_secondary_hover: #f0f1ef;
+$bg_secondary_default: #f6f6f5;
+$bg_primary: #ffffff;
 
-  --neutral-black-100: #0a0a0a;
-  --neutral-black-90: #424242;
-  --neutral-black-80: #616161;
-  --neutral-black-70: #757575;
-  --neutral-black-60: #9e9e9e;
-  --neutral-black-50: #c2c2c2;
-  --neutral-black-40: #e0e0e0;
-  --neutral-black-30: #ededed;
-  --neutral-black-20: #f5f5f5;
-  --white: #fff;
-  --black: #000;
-  --neutral-bg-secondary-default: #f6f6f5;
-  --neutral-text_secondary_default: #70736f;
-  --neutral-bg-secondary-hover: #f0f1ef;
-  --neutral-text_secondary_hover: #555855;
+//Accent
+$accent_default: #43813a;
+$accent_hover: #a3c779;
+$accent_click: #2e6c25;
+$accent_bg_light: #f1fce4;
+$accent_active: #cde2b4;
+$accent_primary_focus: #ffd84e;
 
-  --accent-default-click: #43813a;
-  --accent-hover: #a3c779;
-  --accent-bg-light: #e7f6f5;
-  --accent-active: #b1ceb4;
-  --focus: #e2dc66;
+//Success
+$success_default: #37d121;
+$success_hover: #1caf07;
+$success_bg_light: #f7fdf4;
+$success_stroke: #ade1a5;
 
-  --success-default: #37d121;
-  --success-hover: #1caf07;
-  --success-bg-light: #e7fcdf;
-  --success-stroke: #ade1a5;
+//Warning
+$warning_main: #f2b30f;
+$warning_hover: #d18006;
+$warning_bg_color: #fffbf2;
+$warning_border: #f5ddb9;
 
-  --warning-main: #f2b30f;
-  --warning-hover: #d18006;
-  --warning-bg: #fff8eb;
-  --warning-border: #f5ddb9;
-  --warning-active: #95891d;
-  --warning-focus: #fdf8cf;
+//Error
+$danger_main: #e31b1b;
+$danger_hover: #c20d0d;
+$danger_bg_color: #fff2f2;
+$danger_border: #e2b6b6;
 
-  --error-main: #e31b1b;
-  --error-hover: #c20d0d;
-  --error-bg: #fff2f2;
-  --error-border: #e2e6b6;
-  --error-active: #541212;
-  --error-focus: #ffdfdf;
-
-  --info-main: #4464aa;
-  --info-hover: #212327;
-  --info-active: #001793;
-  --info-bg: #ebeeff;
-  --info-border: #aab6f4;
-}
+//Info
+$info_main: #4464aa;
+$info_hover: #212327;
+$info_active: #6084d3;
+$info_bg_color: #ecf1fb;
+$info_border: #b4c3e5;

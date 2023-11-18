@@ -1,7 +1,9 @@
-import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+
+import { render } from '@testing-library/react';
 import { checkText } from 'utils/tests/checkFunctions';
-import { Header } from './Header';
+
+import { HeaderWidget as Header } from './Header';
 
 test('Header | Render', (): void => {
   render(

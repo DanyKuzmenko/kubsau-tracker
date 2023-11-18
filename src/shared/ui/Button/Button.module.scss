@@ -1,5 +1,6 @@
+@import 'app/styles/index';
+
 .Button {
-  font-family: Roboto, serif;
   font-weight: 400;
   display: flex;
   justify-content: center;
@@ -8,46 +9,49 @@
   outline: none;
   border: none;
   background: none;
+  margin: 0 auto;
+
+  &:hover {
+    transition-timing-function: ease-out;
+    transition-duration: 200ms;
+  }
 }
-.Button:hover {
-  transition-timing-function: ease-out;
-  transition-duration: 200ms;
-}
+
 .primary {
-  background: var(--accent-default-click);
-  color: var(--white);
+  background: $accent_default;
+  color: $bg_primary;
+
+  &:hover {
+    background: $accent_hover;
+  }
 }
+
 .secondary {
-  border: 1px solid var(--accent-default-click);
-  color: var(--accent-default-click);
+  border: 1px solid $accent_default;
+  color: $accent_default;
+
+  &:hover {
+    border: 1px solid $accent_hover;
+    color: $accent_hover;
+  }
 }
+
 .tertiary {
-  background: var(--neutral-bg-secondary-default);
-  color: var(--neutral-text_secondary_default);
+  background: $bg_secondary_default;
+  color: $text_secondary_default;
+
+  &:hover {
+    background: $bg_secondary_hover;
+    color: $text_secondary_hover;
+  }
 }
-.primary:hover {
-  background: var(--accent-hover);
-}
-.secondary:hover {
-  border: 1px solid var(--accent-hover);
-  color: var(--accent-hover);
-}
-.tertiary:hover {
-  background: var(--neutral-bg-secondary-hover);
-  color: var(--neutral-text_secondary_hover);
-}
+
 .xs {
   font-size: 14px;
   padding: 6px 20px;
 }
+
 .s {
   font-size: 16px;
   padding: 8px 24px;
-}
-.m {
-  padding: 14px 32px;
-}
-.l {
-  font-size: 18px;
-  padding: 14px 44px;
 }
