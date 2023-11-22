@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
+import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button';
 
 import styles from './Schedule.module.scss';
 
