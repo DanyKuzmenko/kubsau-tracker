@@ -5,7 +5,7 @@ import { checkText } from 'utils/tests/checkFunctions';
 
 import { HeaderWidget as Header } from './Header';
 
-test('Header | Render', (): void => {
+test('Title | Render', (): void => {
   render(
     <MemoryRouter>
       <Header />

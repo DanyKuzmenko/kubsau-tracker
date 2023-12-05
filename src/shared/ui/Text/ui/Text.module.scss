@@ -1,3 +1,5 @@
+@import 'app/styles/index';
+
 .xs {
   font-size: 12px;
 }
@@ -12,4 +14,8 @@
 
 .xl {
   font-size: 18px;
+}
+
+.white {
+  color: $bg_primary;
 }
