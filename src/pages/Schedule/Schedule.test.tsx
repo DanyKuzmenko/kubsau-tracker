@@ -1,7 +1,8 @@
-import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { checkText } from 'utils/tests/checkFunctions';
+
+import { render } from '@testing-library/react';
 import Schedule from 'pages/Schedule/Schedule';
+import { checkText } from 'utils/tests/checkFunctions';
 
 test('Schedule | Render', (): void => {
   render(

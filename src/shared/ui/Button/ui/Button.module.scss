@@ -1,0 +1,57 @@
+@import 'app/styles/index';
+
+.Button {
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+  margin: 0 auto;
+
+  &:hover {
+    transition-timing-function: ease-out;
+    transition-duration: 200ms;
+  }
+}
+
+.primary {
+  background: $accent_default;
+  color: $bg_primary;
+
+  &:hover {
+    background: $accent_hover;
+  }
+}
+
+.secondary {
+  border: 1px solid $accent_default;
+  color: $accent_default;
+
+  &:hover {
+    border: 1px solid $accent_hover;
+    color: $accent_hover;
+  }
+}
+
+.tertiary {
+  background: $bg_secondary_default;
+  color: $text_secondary_default;
+
+  &:hover {
+    background: $bg_secondary_hover;
+    color: $text_secondary_hover;
+  }
+}
+
+.xs {
+  font-size: 14px;
+  padding: 6px 20px;
+}
+
+.s {
+  font-size: 16px;
+  padding: 8px 24px;
+}

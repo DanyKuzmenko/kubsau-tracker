@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
+
+import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button';
+
 import styles from './Schedule.module.scss';
-import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 
 const Schedule: FC = () => {
   return (
@@ -8,10 +10,10 @@ const Schedule: FC = () => {
       <Button theme={ButtonTheme.PRIMARY} size={ButtonSize.S}>
         Нажать 1
       </Button>
-      <Button theme={ButtonTheme.SECONDARY} size={ButtonSize.L}>
+      <Button theme={ButtonTheme.SECONDARY} size={ButtonSize.XS}>
         Нажать 2
       </Button>
-      <Button theme={ButtonTheme.TERTIARY} size={ButtonSize.M}>
+      <Button theme={ButtonTheme.TERTIARY} size={ButtonSize.S}>
         Нажать 3
       </Button>
     </section>
