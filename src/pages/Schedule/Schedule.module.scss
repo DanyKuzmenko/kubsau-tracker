@@ -1,4 +1,16 @@
+@import "app/styles/index";
 .schedule {
   display: flex;
-  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.active {
+  background: $stroke_text_disabled !important;
+}
+.button {
+  width: 130px;
+  color: black;
 }
