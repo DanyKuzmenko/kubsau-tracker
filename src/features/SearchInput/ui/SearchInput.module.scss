@@ -1,0 +1,24 @@
+@import 'app/styles/index';
+
+.inputContainer {
+  display: flex;
+  gap: 12px;
+  height: 48px;
+}
+
+.input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid $stroke_text_disabled;
+  min-width: 337px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  color: $text_tertiary_default;
+}
+
+.button {
+  padding: 12px 28px;
+  border-radius: 2px;
+}

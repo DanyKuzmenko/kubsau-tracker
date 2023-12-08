@@ -1,0 +1,10 @@
+@import 'app/styles/index';
+
+.schedule {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1120px;
+  margin: 0 auto;
+}

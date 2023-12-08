@@ -1,0 +1,14 @@
+@import 'app/styles/index';
+
+.weekButtons {
+  display: flex;
+}
+
+.active {
+  background: $stroke_text_disabled !important;
+}
+
+.button {
+  width: 130px;
+  color: black;
+}

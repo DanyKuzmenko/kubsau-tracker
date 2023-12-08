@@ -1,0 +1,26 @@
+@import 'app/styles/index';
+
+.groupFilter {
+  border-radius: 4px;
+  display: flex;
+  align-self: start;
+  padding: 4px;
+  background-color: $bg_secondary_default;
+}
+
+.active {
+  background-color: $text_secondary_default;
+  color: $bg_primary;
+  border-radius: 4px;
+  font-size: 16px;
+
+  &:hover {
+    background-color: $text_secondary_default;
+    color: $bg_primary;
+  }
+}
+
+.inactive {
+  font-size: 16px;
+  background-color: inherit;
+}

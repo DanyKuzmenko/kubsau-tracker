@@ -16,7 +16,7 @@ export enum ButtonSize {
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   theme: ButtonTheme;
-  size: ButtonSize;
+  size?: ButtonSize;
 }
 
 const Button: FC<ButtonProps> = ({ className, children, theme, size, ...otherProps }) => {
