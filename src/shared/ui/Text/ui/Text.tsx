@@ -1,9 +1,13 @@
 import { FC, HTMLAttributes } from 'react';
+
 import { classNames } from 'shared/lib/classNames';
+
 import cls from './Text.module.scss';
 
+
 export enum TextColor {
-  WHITE = 'white'
+  WHITE = 'white',
+  BLACK = 'black'
 }
 
 export enum TextSize {

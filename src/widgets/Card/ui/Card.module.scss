@@ -1,0 +1,31 @@
+@import 'app/styles/index';
+.Card {
+  max-width: 360px;
+}
+.header {
+  display: flex;
+  gap: 16px;
+  padding: 8px 0 8px 12px;
+  background: $info_stroke;
+  width: 360px;
+  color: $text_primary_default;
+}
+.monthday {
+  position: relative;
+}
+.monthday:before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 2px;
+  width: 1.4px;
+  height: 16px;
+  background: $text_primary_default;
+}
+.today .header{
+  background: $error-stroke;
+  color: #fff;
+}
+.today .monthday:before {
+  background: #fff;
+}
