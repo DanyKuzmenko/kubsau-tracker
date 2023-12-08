@@ -1,0 +1,32 @@
+@import 'app/styles/index';
+
+.selectedPageLinks {
+  display: flex;
+}
+
+.link {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 148%;
+  text-decoration: none;
+  padding: 0 16px 4px 16px;
+  border-bottom: 1px solid;
+  transition-duration: 0.3s;
+}
+
+.inactive {
+  color: $text_primary_default;
+  border-bottom-color: $bg_secondary_default;
+
+  &:hover {
+    color: $accent_hover;
+    border-bottom-color: $accent_hover;
+  }
+}
+
+.active {
+  color: $accent_default;
+  border-bottom-color: $accent_default;
+}

@@ -14,9 +14,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "rootDir": "./src"
   },
   "include": [
     "src",
-    "declaration.d.ts"]
+    "declaration.d.ts"
+  ]
 }

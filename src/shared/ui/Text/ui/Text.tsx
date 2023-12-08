@@ -4,17 +4,16 @@ import { classNames } from 'shared/lib/classNames';
 
 import cls from './Text.module.scss';
 
-
 export enum TextColor {
   WHITE = 'white',
-  BLACK = 'black'
+  BLACK = 'black',
 }
 
 export enum TextSize {
   XS = 'xs',
   S = 's',
   LG = 'lg',
-  XL = 'xl'
+  XL = 'xl',
 }
 
 interface TextProps extends HTMLAttributes<HTMLParagraphElement> {

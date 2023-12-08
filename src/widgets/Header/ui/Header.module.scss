@@ -1,6 +1,9 @@
+@import 'app/styles/index';
+
 .header {
   display: flex;
   justify-content: center;
-  padding: 30px;
-  background-color: #e0e0e0;
+  padding: 8px 16px;
+  background-color: $bg_primary;
+  box-shadow: 0 4px 4px 0 rgba(185, 181, 189, 0.16);
 }

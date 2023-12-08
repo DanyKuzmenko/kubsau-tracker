@@ -1,18 +1,20 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { scheduleBrowserRoutes } from 'app/routes/schedule';
+import { scheduleBrowserRoutes, scheduleRoutes } from 'app/routes/schedule';
+import { tasksBrowserRoutes, tasksRoutes } from 'app/routes/tasks';
 import { MainLayout } from 'pages/MainLayout';
 import { PageNotFound } from 'pages/PageNotFound';
 
 export const routes = {
-  login: '/login',
+  ...tasksRoutes,
+  ...scheduleRoutes,
 };
 
 export const browserRoutes = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-    children: [...scheduleBrowserRoutes],
+    children: [...scheduleBrowserRoutes, ...tasksBrowserRoutes],
   },
   {
     path: '*',

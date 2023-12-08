@@ -1,4 +1,4 @@
-import Schedule from 'pages/Schedule/Schedule';
+import { Schedule } from 'pages/Schedule';
 
 export const scheduleRoutes = {
   schedule: '/schedule',
