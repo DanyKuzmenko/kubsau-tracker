@@ -42,11 +42,23 @@ export const createWeek = (nextWeek: boolean) => {
           timeEnd: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 5),
         },
       ],
+      tasks: [
+        {
+          title: 'Изучить основные способы записи алгоритмов',
+          subject: 'Проектирование систем на кристалле',
+          isDone: false,
+        },
+        {
+          title: 'Лабораторная работа №4 (1-2, 5-7)',
+          subject: 'Технологии облачных вычислений',
+          isDone: true,
+        }
+
+      ]
     });
 
     today.setDate(today.getDate() + 1);
   }
 
-  console.log('week', week);
   return week;
 };

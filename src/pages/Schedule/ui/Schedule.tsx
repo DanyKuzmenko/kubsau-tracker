@@ -6,6 +6,7 @@ import { Filters } from 'widgets/Filters';
 
 import cls from './Schedule.module.scss';
 
+
 type Days = {
   classes: {
     number: number;
@@ -18,11 +19,10 @@ type Days = {
 const Schedule: FC = () => {
   const [days, setDays] = useState<Days>(createWeek(false));
 
-  console.log('days', days);
 
   return (
     <>
-      <Filters setDays={setDays} />
+      <Filters setDays={setDays} selectedPage={'schedule'}/>
 
       <section className={cls.schedule}>
         {days.map((item) => {

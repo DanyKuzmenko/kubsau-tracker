@@ -4,7 +4,9 @@
   display: flex;
   border-bottom: 1px solid $bg_secondary_hover;
 }
-
+.UnivClass:last-of-type {
+  border-bottom: none;
+}
 .time {
   border-right: 6px solid $bg_secondary_hover;
   padding: 12px 8px;
