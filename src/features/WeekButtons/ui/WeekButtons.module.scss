@@ -5,9 +5,12 @@
 }
 
 .active {
-  background: $stroke_text_disabled !important;
+  background: $stroke_text_disabled;
 }
-
+.active:hover {
+  background: $stroke_text_disabled;
+  color: inherit;
+}
 .button {
   width: 130px;
   color: black;

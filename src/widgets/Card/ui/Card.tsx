@@ -1,19 +1,26 @@
 import { FC } from 'react';
 
+import { TaskItem } from 'features/TaskItem/TaskItem';
 import { UniversityClass } from 'features/UniversityClass';
 import { classNames } from 'shared/lib/classNames';
 
 import cls from './Card.module.scss';
 
+
 interface CardProps {
   date: Date;
-  classes: {
+  classes?: {
     timeStart: Date;
     timeEnd: Date;
     number: number;
   }[];
+  tasks?: {
+      title: string;
+      subject: string;
+      isDone: boolean;
+  }[];
 }
-const Card: FC<CardProps> = ({ date, classes }) => {
+const Card: FC<CardProps> = ({ date, classes, tasks , }) => {
   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
   const isToday = date.getDate() === new Date().getDate();
@@ -29,11 +36,17 @@ const Card: FC<CardProps> = ({ date, classes }) => {
         </div>
       </header>
       <div className={cls.cardContent}>
-        <div className={classNames(cls.univClass, {}, [])}>
-          {classes.map((item) => {
-            return <UniversityClass key={item.number} start={item.timeStart} end={item.timeEnd} />;
-          })}
-        </div>
+          {classes && <div className={classNames(cls.univClass, {}, [])}>
+              {classes.map((item) => {
+                  return <UniversityClass key={item.number} start={item.timeStart} end={item.timeEnd} />;
+              })}
+          </div>
+          }
+          {tasks && <div>
+              {tasks.map((item) => {
+                  return <TaskItem key={item.title} subject={item.subject} title={item.title} isDone={item.isDone}/>;
+              })}
+          </div>}
       </div>
     </div>
   );
