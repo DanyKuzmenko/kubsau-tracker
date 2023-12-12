@@ -14,7 +14,7 @@ const Tasks = () => {
     const [cards, setCards] = useState<TaskCardType[]>();
     const refObject = useRef(null);
     const handleClick = (evt: React.MouseEvent) => {
-        if (evt.target == refObject.current) {
+        if (evt.target === refObject.current) {
             setIsModalVisible(false)
         }
     }

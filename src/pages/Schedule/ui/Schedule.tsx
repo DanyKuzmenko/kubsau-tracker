@@ -21,11 +21,11 @@ const Schedule: FC = () => {
     <>
       <Filters selectedPage={'schedule'}/>
 
-      <section className={cls.schedule}>
-        {cards.map((item) => {
-          return <Card key={item.date.toString()} date={new Date(item.date)} lessons={item.lessons}></Card>;
-        })}
-      </section>
+        {cards && <section className={cls.schedule}>
+            {cards.map((item) => {
+                return <Card key={item.date.toString()} date={new Date(item.date)} lessons={item.lessons}></Card>;
+            })}
+        </section>}
     </>
   );
 };
