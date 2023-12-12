@@ -1,4 +1,16 @@
 .main {
   display: flex;
   flex-direction: column;
+  margin: 0 7%;
+}
+@media screen and (max-width: 1200px){
+  .main {
+    padding: 0 3%;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .main {
+    padding: 0;
+  }
 }

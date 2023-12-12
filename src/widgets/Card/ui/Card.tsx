@@ -13,14 +13,10 @@ interface CardProps {
     timeStart: Date;
     timeEnd: Date;
     number: number;
-  }[];
-  tasks?: {
-      title: string;
-      subject: string;
-      isDone: boolean;
+    isLecture: boolean;
   }[];
 }
-const Card: FC<CardProps> = ({ date, classes, tasks , }) => {
+const Card: FC<CardProps> = ({ date, classes }) => {
   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
   const isToday = date.getDate() === new Date().getDate();
@@ -38,15 +34,21 @@ const Card: FC<CardProps> = ({ date, classes, tasks , }) => {
       <div className={cls.cardContent}>
           {classes && <div className={classNames(cls.univClass, {}, [])}>
               {classes.map((item) => {
-                  return <UniversityClass key={item.number} start={item.timeStart} end={item.timeEnd} />;
+                  return <UniversityClass key={item.number} start={item.timeStart} end={item.timeEnd} isLecture={item.isLecture} />;
               })}
           </div>
           }
-          {tasks && <div>
-              {tasks.map((item) => {
-                  return <TaskItem key={item.title} subject={item.subject} title={item.title} isDone={item.isDone}/>;
-              })}
-          </div>}
+          {/*{task && <div>*/}
+          {/*    {task.map((item) => {*/}
+          {/*        return <TaskItem key={item.title} subject={item.description} title={item.title} isDone={false}/>;*/}
+          {/*    })}*/}
+          {/*</div>}*/}
+        {/*Здесь должны быть задачи*/}
+        {/*Добавить isDone выполнена ли задача в целом
+
+
+        */}
+
       </div>
     </div>
   );

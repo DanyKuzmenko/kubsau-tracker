@@ -4,13 +4,16 @@
   display: flex;
   gap: 12px;
   height: 48px;
+  flex: 1 0;
+  min-width: 400px;
 }
 
 .input {
   outline: none;
   border: none;
   border-bottom: 1px solid $stroke_text_disabled;
-  min-width: 337px;
+  flex: 1 0;
+
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -22,3 +25,16 @@
   padding: 12px 28px;
   border-radius: 2px;
 }
+
+@media screen and (max-width: 1200px){
+    .inputContainer {
+      order: 1;
+    }
+}
+@media screen and (max-width: 883px){
+    .inputContainer {
+      order: unset;
+      min-width: unset;
+    }
+}
+

@@ -1,0 +1,22 @@
+{
+  "Tasks End Point": [
+    {
+
+    }
+  ],
+  "Schedule End Point": [
+    {
+      "id": "string",
+      "date": "string",
+      "lessons": [
+        {
+          "number": "number",
+          "subject": "string",
+          "group": "string",
+          "auditorium": "string",
+          "teacher": "string"
+        }
+      ]
+    }
+  ]
+}

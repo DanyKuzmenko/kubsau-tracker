@@ -12,6 +12,7 @@ type Days = {
     number: number;
     timeEnd: Date;
     timeStart: Date;
+    isLecture: boolean;
   }[];
   date: Date;
 }[];

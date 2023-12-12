@@ -7,13 +7,14 @@ interface UniversityClassProps {
   className?: string;
   start: Date;
   end: Date;
+  isLecture: boolean;
 }
 
-const UniversityClass: FC<UniversityClassProps> = ({ className, start, end }) => {
+const UniversityClass: FC<UniversityClassProps> = ({ className, start, end, isLecture }) => {
   const isGoingNow = start < new Date() && end > new Date();
   return (
     <div className={classNames(cls.UnivClass, {}, [className])}>
-      <div className={classNames(cls.time, { [cls.isGoing]: isGoingNow }, [])}>
+      <div className={classNames(cls.time, { [cls.isGoing]: isGoingNow, [cls.lecture]: isLecture}, [])}>
         <div className={cls.timeStart}>
           {start.toLocaleTimeString('ru', {
             minute: 'numeric',
