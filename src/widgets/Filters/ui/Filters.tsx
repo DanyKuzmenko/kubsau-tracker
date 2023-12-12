@@ -8,11 +8,10 @@ import cls from './Filters.module.scss';
 
 
 type Props = {
-  setDays: (state: any[]) => void;
   selectedPage: SelectedLink
 };
 
-const Filters = ({ setDays , selectedPage}: Props) => {
+const Filters = ({selectedPage}: Props) => {
   return (
     <section className={cls.filters}>
       <SelectedPageLinks selectedPage={selectedPage}/>
@@ -20,7 +19,7 @@ const Filters = ({ setDays , selectedPage}: Props) => {
       <div className={cls.container}>
         <GroupFilter />
         <SearchInput />
-        <WeekButtons setDays={setDays} />
+        <WeekButtons />
       </div>
     </section>
   );

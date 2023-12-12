@@ -5,6 +5,7 @@ import { UniversityClass } from 'features/UniversityClass';
 import { classNames } from 'shared/lib/classNames';
 
 import cls from './Card.module.scss';
+import { TaskType } from '../../../fakeApi/types';
 
 
 interface CardProps {
@@ -15,8 +16,10 @@ interface CardProps {
     number: number;
     isLecture: boolean;
   }[];
+  tasks?: TaskType[]
 }
-const Card: FC<CardProps> = ({ date, classes }) => {
+
+const Card: FC<CardProps> = ({ date, classes, tasks }) => {
   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
   const isToday = date.getDate() === new Date().getDate();
@@ -38,16 +41,12 @@ const Card: FC<CardProps> = ({ date, classes }) => {
               })}
           </div>
           }
-          {/*{task && <div>*/}
-          {/*    {task.map((item) => {*/}
-          {/*        return <TaskItem key={item.title} subject={item.description} title={item.title} isDone={false}/>;*/}
-          {/*    })}*/}
-          {/*</div>}*/}
-        {/*Здесь должны быть задачи*/}
-        {/*Добавить isDone выполнена ли задача в целом
+          {tasks && <div>
+              {tasks.map((item) => {
+                  return <TaskItem key={item.id} subject={item.subject} title={item.title} isDone={item.isDone}/>;
+              })}
+          </div>}
 
-
-        */}
 
       </div>
     </div>

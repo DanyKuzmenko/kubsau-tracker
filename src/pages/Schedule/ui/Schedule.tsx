@@ -23,7 +23,7 @@ const Schedule: FC = () => {
 
   return (
     <>
-      <Filters setDays={setDays} selectedPage={'schedule'}/>
+      <Filters selectedPage={'schedule'}/>
 
       <section className={cls.schedule}>
         {days.map((item) => {
