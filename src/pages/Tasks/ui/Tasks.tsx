@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { createWeek } from 'shared/lib/createWeek/createWeek';
+import { TaskCardType } from 'app/types/types';
+import { TaskCards } from 'fakeApi/fakeApi';
+import { classNames } from 'shared/lib/classNames';
 import { Card } from 'widgets/Card';
 import { Filters } from 'widgets/Filters';
 
 import cls from './Tasks.module.scss';
-import axios from 'axios';
-import { TaskCardType } from 'fakeApi/types';
-import { TaskCards } from 'fakeApi/fakeApi';
-
 
 
 const Tasks = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false)
     const [cards, setCards] = useState<TaskCardType[]>();
-
+    const refObject = useRef(null);
+    const handleClick = (evt: React.MouseEvent) => {
+        if (evt.target == refObject.current) {
+            setIsModalVisible(false)
+        }
+    }
   useEffect(() => {
-    // axios.get("http://localhost:3000/api/cards").then(response => {
+    // axios.get("http://localhost:3000/api/tasks").then(response => {
     //   setCards(response.data)
     // })
     setCards(TaskCards)
@@ -26,13 +30,16 @@ const Tasks = () => {
       <>
           <Filters selectedPage={'tasks'}/>
         {
-          cards && <section className={cls.tasks}>
+          cards && <section ref={refObject} onClick={handleClick} className={classNames(cls.tasks,
+                {[cls.modalVisible]: isModalVisible}, [])}>
             {cards.map((item) => {
-              return <Card key={item.id} date={new Date(item.date)} tasks={item.tasks}/>
+              return <Card isVisible={isModalVisible} setIsVisible={setIsModalVisible}
+                           key={item.id} date={new Date(item.date)} tasks={item.tasks}/>
             })}
           </section>
         }
       </>
+
 
   );
 };

@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
 
-import cls from 'features/UniversityClass/ui/UniversityClass.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
+
+import cls from './UniversityClass.module.scss';
 
 interface UniversityClassProps {
   className?: string;
   start: Date;
   end: Date;
   isLecture: boolean;
+  subject: string;
+  auditorium: string;
+  teacher: string;
 }
 
-const UniversityClass: FC<UniversityClassProps> = ({ className, start, end, isLecture }) => {
+const UniversityClass: FC<UniversityClassProps> = ({ className, start, end, isLecture, subject, auditorium, teacher }) => {
   const isGoingNow = start < new Date() && end > new Date();
   return (
     <div className={classNames(cls.UnivClass, {}, [className])}>
@@ -30,10 +34,10 @@ const UniversityClass: FC<UniversityClassProps> = ({ className, start, end, isLe
       </div>
       <div className={cls.content}>
         <div>
-          <div className={cls.subject}>Основы Web-инжиниринга</div>
-          <div className={cls.teacherName}>Лищенко К.Д.</div>
+          <div className={cls.subject}>{subject}</div>
+          <div className={cls.teacherName}>{teacher}</div>
         </div>
-        <div className={cls.classRoom}>420эл</div>
+        <div className={cls.classRoom}>{auditorium}</div>
       </div>
     </div>
   );

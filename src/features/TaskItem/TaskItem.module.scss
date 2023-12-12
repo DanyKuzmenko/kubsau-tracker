@@ -17,37 +17,3 @@
   font-size: 12px;
   color: $text-secondary-default;
 }
-
-.customCheckbox {
-   display: flex;
-   align-items: center;
- }
-
-.customCheckbox .checkbox {
-  margin-right: 10px;
-}
-
-.customCheckbox input {
-  opacity: 0;
-  position: absolute;
-}
-
-.checkbox {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  border: 1px solid $stroke_text_disabled;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.customCheckbox input:checked ~ .checkbox .checkmark {
-  display: block;
-}
-
-.customCheckbox input:checked ~ .checkbox {
-  background: $accent_default;
-  border: none;
-}

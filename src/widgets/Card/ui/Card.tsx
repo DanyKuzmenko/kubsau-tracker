@@ -1,25 +1,23 @@
 import { FC } from 'react';
 
+import { LessonType, TaskType } from 'app/types/types';
 import { TaskItem } from 'features/TaskItem/TaskItem';
 import { UniversityClass } from 'features/UniversityClass';
 import { classNames } from 'shared/lib/classNames';
+import { timeEnd, timeStart } from 'shared/lib/timeStartEnd/TimeStartEnd';
 
 import cls from './Card.module.scss';
-import { TaskType } from '../../../fakeApi/types';
 
 
 interface CardProps {
   date: Date;
-  classes?: {
-    timeStart: Date;
-    timeEnd: Date;
-    number: number;
-    isLecture: boolean;
-  }[];
-  tasks?: TaskType[]
+  lessons?: LessonType[];
+  tasks?: TaskType[];
+  isVisible?: boolean;
+  setIsVisible?: (set: boolean) => void
 }
 
-const Card: FC<CardProps> = ({ date, classes, tasks }) => {
+const Card: FC<CardProps> = ({ date, lessons, tasks, setIsVisible, isVisible }) => {
   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
   const isToday = date.getDate() === new Date().getDate();
@@ -35,15 +33,34 @@ const Card: FC<CardProps> = ({ date, classes, tasks }) => {
         </div>
       </header>
       <div className={cls.cardContent}>
-          {classes && <div className={classNames(cls.univClass, {}, [])}>
-              {classes.map((item) => {
-                  return <UniversityClass key={item.number} start={item.timeStart} end={item.timeEnd} isLecture={item.isLecture} />;
+          {lessons && <div className={classNames(cls.univClass, {}, [])}>
+              {lessons.map((item) => {
+                  return <UniversityClass
+                      key={item.number}
+                      start={timeStart(date, item.number)}
+                      end={timeEnd(date, item.number)} isLecture={item.isLecture}
+                      subject={item.subject}
+                      auditorium={item.auditorium}
+                      teacher={item.teacher}
+
+                  />;
               })}
           </div>
           }
           {tasks && <div>
               {tasks.map((item) => {
-                  return <TaskItem key={item.id} subject={item.subject} title={item.title} isDone={item.isDone}/>;
+                  return <TaskItem
+                      setIsVisible={setIsVisible}
+                      isVisible={isVisible}
+                      key={item.id}
+                      subject={item.subject}
+                      title={item.title}
+                      isDone={item.isDone}
+                      checkboxes={item.checkboxes}
+                      teacher={item.teacher}
+                      description={item.description}
+                      deadline={new Date(item.deadline)}
+                  />
               })}
           </div>}
 
