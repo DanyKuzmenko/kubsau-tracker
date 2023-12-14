@@ -3,6 +3,26 @@
     gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 1120px;
     margin: 0 auto;
+    width: 100%;
+}
+.modalVisible:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(7, 7, 6, 0.12);
+    z-index: 10;
+}
+@media screen and (max-width: 1200px){
+    .tasks {
+        padding: 0 75px;
+    }
+}
+@media screen and (max-width: 768px){
+    .tasks {
+        padding: 0;
+    }
 }

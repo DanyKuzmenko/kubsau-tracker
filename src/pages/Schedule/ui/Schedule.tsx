@@ -1,34 +1,31 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
-import { createWeek } from 'shared/lib/createWeek/createWeek';
+import { ScheduleCardType } from 'app/types/types';
+import { ScheduleCards } from 'fakeApi/fakeApi';
 import { Card } from 'widgets/Card';
 import { Filters } from 'widgets/Filters';
 
 import cls from './Schedule.module.scss';
 
 
-type Days = {
-  classes: {
-    number: number;
-    timeEnd: Date;
-    timeStart: Date;
-  }[];
-  date: Date;
-}[];
-
 const Schedule: FC = () => {
-  const [days, setDays] = useState<Days>(createWeek(false));
-
+  const [cards, setCards] = useState<ScheduleCardType[]>();
+    useEffect(() => {
+        // axios.get("http://localhost:3000/api/schedule").then(response => {
+        //   setCards(response.data)
+        // })
+        setCards(ScheduleCards)
+    }, []);
 
   return (
     <>
-      <Filters setDays={setDays} selectedPage={'schedule'}/>
+      <Filters selectedPage={'schedule'}/>
 
-      <section className={cls.schedule}>
-        {days.map((item) => {
-          return <Card key={item.date.toString()} date={item.date} classes={item.classes}></Card>;
-        })}
-      </section>
+        {cards && <section className={cls.schedule}>
+            {cards.map((item) => {
+                return <Card key={item.date.toString()} date={new Date(item.date)} lessons={item.lessons}></Card>;
+            })}
+        </section>}
     </>
   );
 };

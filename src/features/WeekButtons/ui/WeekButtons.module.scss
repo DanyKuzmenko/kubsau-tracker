@@ -2,16 +2,31 @@
 
 .weekButtons {
   display: flex;
+  gap: 8px;
 }
 
 .active {
   background: $stroke_text_disabled;
+  font-weight: 500;
 }
 .active:hover {
   background: $stroke_text_disabled;
   color: inherit;
 }
 .button {
-  width: 130px;
+  width: 152px;
+  padding: 8px 20px;
   color: black;
+  white-space: nowrap;
+}
+@media screen and (max-width: 560px){
+  .button {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 390px){
+  .button {
+    padding: 8px 5%;
+    white-space: unset;
+  }
 }

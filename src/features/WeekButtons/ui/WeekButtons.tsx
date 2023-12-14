@@ -6,21 +6,16 @@ import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button';
 
 import cls from './WeekButtons.module.scss';
 
-type Props = {
-  setDays: (state: any[]) => void;
-};
 
-const WeekButtons = ({ setDays }: Props) => {
+const WeekButtons = () => {
   const [isNextWeek, setIsNextWeek] = useState<boolean>(false);
 
   const handleCurrentWeekClick = (): void => {
     setIsNextWeek(false);
-    setDays(createWeek(false));
   };
 
   const handleNextWeekClick = (): void => {
     setIsNextWeek(true);
-    setDays(createWeek(true));
   };
 
   return (

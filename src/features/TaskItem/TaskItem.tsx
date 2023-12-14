@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 
+import { CheckboxType } from 'app/types/types';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { CheckBox } from 'shared/ui/CheckBox';
+import { ModalTask } from 'widgets/ModalTask/ModalTask';
 
 import cls from './TaskItem.module.scss';
 
@@ -10,21 +13,30 @@ interface TaskItemProps {
   title: string;
   subject: string;
   isDone: boolean;
+  checkboxes: CheckboxType[];
+  deadline: Date;
+  teacher: string;
+  description: string;
+  isVisible: boolean;
+  setIsVisible: (set: boolean) => void
 }
 
-const TaskItem: FC<TaskItemProps> = ({className, title, subject, isDone}) => {
+const TaskItem: FC<TaskItemProps> = ({className, title, subject, isDone, description,
+                                     deadline, checkboxes, teacher, isVisible, setIsVisible}) => {
+
+
+    const dbClickHandle = (evt: React.MouseEvent) => {
+        evt.preventDefault();
+        setIsVisible(true)
+    }
+
     return (
         <div className={classNames(cls.TaskItem, {}, [className])}>
-            <label className= {cls.customCheckbox}>
-                <input defaultChecked={isDone} type="checkbox"/>
-                    <div className= {cls.checkbox}>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                    </div>
-            </label>
-
-            <div className={cls.descriptionContainer}>
+            <CheckBox isDone={isDone}/>
+            <div
+                className={cls.descriptionContainer}
+                onDoubleClick={dbClickHandle}
+            >
                 <div className={classNames(cls.title, {}, [])}>
                     {title}
                 </div>
@@ -33,6 +45,18 @@ const TaskItem: FC<TaskItemProps> = ({className, title, subject, isDone}) => {
                     {subject}
                 </div>
             </div>
+            <ModalTask
+                checkboxes={checkboxes}
+                title={title}
+                subject={subject}
+                isDone={isDone}
+                deadline={deadline}
+                teacher={teacher}
+                description={description}
+                isVisible={isVisible}
+                setIsVisible={setIsVisible}
+
+            />
         </div>
     );
 };
