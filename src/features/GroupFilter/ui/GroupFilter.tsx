@@ -1,44 +1,47 @@
-import { useState } from 'react';
+import {FC} from 'react';
 
-import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button';
+import {Button, ButtonSize, ButtonTheme} from 'shared/ui/Button';
 
 import cls from './GroupFilter.module.scss';
 
-type FilterStatuses = 'group' | 'classroom';
+type FilterStatuses = 'group' | 'room';
 
-const GroupFilter = () => {
-  const [filterStatus, setFilterStatus] = useState<FilterStatuses>('group');
+interface GroupFilterProps {
+    searchType: string;
+    setSearchType: (arg0: FilterStatuses) => void;
+}
 
-  const isGroupActive = filterStatus === 'group';
+const GroupFilter: FC<GroupFilterProps> = ({searchType, setSearchType}) => {
 
-  const handleGroupClick = (): void => {
-    setFilterStatus('group');
-  };
 
-  const handleClassroomClick = (): void => {
-    setFilterStatus('classroom');
-  };
+    const handleGroupClick = (): void => {
+        setSearchType('group');
+    };
 
-  return (
-    <div className={cls.groupFilter}>
-      <Button
-        theme={ButtonTheme.TERTIARY}
-        size={ButtonSize.XS}
-        className={isGroupActive ? cls.active : cls.inactive}
-        onClick={handleGroupClick}
-      >
-        По группе
-      </Button>
-      <Button
-        theme={ButtonTheme.TERTIARY}
-        size={ButtonSize.XS}
-        className={!isGroupActive ? cls.active : cls.inactive}
-        onClick={handleClassroomClick}
-      >
-        По аудитории
-      </Button>
-    </div>
-  );
+    const handleClassroomClick = (): void => {
+        setSearchType('room');
+    };
+
+    return (
+        <div className={cls.groupFilter}>
+            <Button
+                theme={ButtonTheme.TERTIARY}
+                size={ButtonSize.XS}
+                className={searchType === 'group' ? cls.active : cls.inactive}
+                onClick={handleGroupClick}
+            >
+                По группе
+            </Button>
+            <Button
+                theme={ButtonTheme.TERTIARY}
+                size={ButtonSize.XS}
+                className={searchType === 'room' ? cls.active : cls.inactive}
+                onClick={handleClassroomClick}
+            >
+                По аудитории
+            </Button>
+        </div>
+    );
 };
 
-export { GroupFilter };
+export {GroupFilter};
