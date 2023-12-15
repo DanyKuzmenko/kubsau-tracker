@@ -9,7 +9,6 @@ import { Button, ButtonTheme } from 'shared/ui/Button';
 
 
 import cls from './SearchInput.module.scss';
-import { ScheduleType } from 'widgets/Filters/ui/Filters';
 
 
 interface SearchInputProps {
@@ -18,7 +17,16 @@ interface SearchInputProps {
     inputValue: string
     setInputValue: (str: string) => void
 }
-
+export type ScheduleType = {
+    groups: {
+        id: string;
+        name: string;
+    }[]
+    rooms: {
+        id: string;
+        name: string;
+    }[]
+}
 const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputValue}) => {
 
 
@@ -77,20 +85,24 @@ const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputVal
                   className={cls.input}
                   onChange={handleInputChange}
                   value={inputValue}
-                  placeholder={searchType ==='rooms' ? 'Искать по аудитории' : 'Искать по группе'} />
+                  placeholder={searchType === 'rooms' ? 'Искать по аудитории' : 'Искать по группе'} />
                 <Button theme={ButtonTheme.PRIMARY} className={cls.button}>
                     <img src={searchIcon} alt={'Поиск.'} />
                 </Button>
+                {suggestions && <div className={suggestions && cls.suggestions}
+                                     style={{height: suggestions[searchType].length * 40 + 'px'}}>
+                    {                    suggestions[searchType] && suggestions[searchType].map((item) => {
+                        return <div className={cls.suggestionItem} key={item.name}> {item.name} </div>
+                    })}
+                </div>}
+
+
             </div>
-            <div>
-                {suggestions && suggestions[searchType] && suggestions[searchType].map((item) => {
-                    return <div key={item.name}> {item.name} </div>
-                })}
-            </div>
+
         </>
 
 
     );
-    };
+};
 
 export { SearchInput };

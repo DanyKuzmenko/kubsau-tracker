@@ -16,16 +16,7 @@ type Props = {
     week: weeks;
     setWeek: (weeks: weeks) => void;
 };
-export type ScheduleType = {
-  groups: {
-    id: string;
-    name: string;
-  }[]
-  rooms: {
-    id: string;
-    name: string;
-  }[]
-}
+
 
 const Filters = ({selectedPage, searchType, setSearchType, week, setWeek}: Props) => {
   const [inputValue, setInputValue] = useState<string>('');
