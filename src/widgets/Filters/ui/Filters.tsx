@@ -9,11 +9,13 @@ import {useState} from "react";
 
 
 type Props = {
-    selectedPage: SelectedLink
+    selectedPage: SelectedLink;
+    setSearchType: (arg0: 'group' | 'room') => void
+    searchType: 'group' | 'room';
 };
 
-const Filters = ({selectedPage}: Props) => {
-    const [searchType, setSearchType] = useState<'group'|'room'>('group')
+const Filters = ({selectedPage, searchType, setSearchType}: Props) => {
+
 
     return (
         <section className={cls.filters}>

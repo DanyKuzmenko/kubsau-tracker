@@ -4,10 +4,12 @@ import searchIcon from 'assets/images/searchIcon.svg';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 
 import cls from './SearchInput.module.scss';
-import {getGroups, getRooms} from "app/api/api";
+import {getGroupById, getGroups, getRoomById, getRooms} from "app/api/api";
 
 interface SearchInputProps {
     searchType: string;
+    setGroupClasses?:() => void;
+    setRoomClasses?: () => void
 }
 
 const SearchInput: FC<SearchInputProps> = ({ searchType}) => {
@@ -27,17 +29,32 @@ const SearchInput: FC<SearchInputProps> = ({ searchType}) => {
                     setSuggestions(responseData);
                 });
             } else {
-                getRooms().then(responseData => {
-                    setSuggestions(responseData);
-                });
+                // getRooms().then(responseData => {
+                //     setSuggestions(responseData);
+                // });
             }
         } else {
             setSuggestions([]);
         }
     }, [inputValue, searchType]);
+    const filterByName = (name: string) => {
+        return suggestions.filter(({id, name}) => {
+            return name === name;
+        })[0].id
 
+    }
     const handleInputChange = (e: React.ChangeEvent): void => {
-    setInputValue((e.target as HTMLInputElement).value);
+        setInputValue((e.target as HTMLInputElement).value);
+        const id = filterByName((e.target as HTMLInputElement).value);
+        if (searchType === 'group') {
+            getGroupById(id).then(res => {
+                // setGroupClasses(res.data)
+            })
+        } else {
+            getRoomById(id).then(res => {
+                // setRoomClasses(res.data)
+            })
+        }
     };
 
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { LessonType, TaskType } from 'app/types/types';
+import { TaskType } from 'app/types/types';
 import { TaskItem } from 'features/TaskItem/TaskItem';
 import { UniversityClass } from 'features/UniversityClass';
 import { classNames } from 'shared/lib/classNames';
@@ -11,13 +11,12 @@ import cls from './Card.module.scss';
 
 interface CardProps {
   date: Date;
-  lessons?: LessonType[];
   tasks?: TaskType[];
   isVisible?: boolean;
   setIsVisible?: (set: boolean) => void
 }
 
-const Card: FC<CardProps> = ({ date, lessons, tasks, setIsVisible, isVisible }) => {
+const Card: FC<CardProps> = ({ date, tasks, setIsVisible, isVisible }) => {
   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
   const isToday = date.getDate() === new Date().getDate();
