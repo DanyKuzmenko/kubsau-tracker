@@ -20,18 +20,43 @@ export type TaskCardType = {
   tasks: TaskType[]
 }
 
-export type LessonType = {
-    number: number
-    subject: string
-    group: string
-    auditorium: string
-    teacher: string
-    isLecture: boolean
+export type ScheduleData = {
+    type: string
+    id: string
+    lastRefresh: string
+    currentWeek: number
+    name: string
+    weeks: WeekType[]
 }
-export type ScheduleCardType = {
-    id: string;
+type WeekType = {
+    number: number;
+    days: DayType[];
+}
+
+type DayType = {
+    number: number;
     date: string;
-    lessons: LessonType[];
+    classes: ClassType[]
 }
 
+export type ClassType = {
+    number: number;
+    start: string;
+    finish: string;
+    lessons: LessonType[] | [] | null;  //Отсутствие лекции в GetByRoom - null | в GetByGroup - []
+}
 
+export type LessonType = {
+    name: string;
+    type: "lec" | "pract" | "";
+    teachers: TeacherType[]
+}
+
+export type TeacherType = {
+    id: string;
+    name: string;
+    link: string;
+    isOnline: boolean;
+    room: string;
+    online: string
+}

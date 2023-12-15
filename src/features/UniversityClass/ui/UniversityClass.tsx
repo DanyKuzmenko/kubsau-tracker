@@ -1,24 +1,29 @@
 import React, { FC } from 'react';
 
-import { classNames } from 'shared/lib/classNames/classNames';
-
-import cls from './UniversityClass.module.scss';
+import { LessonType } from 'app/types/types';
+import UniversityLesson from 'features/UniversityLesson/UniversityLesson';
+import cls from 'features/UniversityLesson/UniversityLesson.module.scss';
+import { classNames } from 'shared/lib/classNames';
 
 interface UniversityClassProps {
   className?: string;
   start: Date;
   end: Date;
-  isLecture: boolean;
-  subject: string;
-  auditorium: string;
-  teacher: string;
+  lessons: LessonType[];
 }
 
-const UniversityClass: FC<UniversityClassProps> = ({ className, start, end, isLecture, subject, auditorium, teacher }) => {
-  const isGoingNow = start < new Date() && end > new Date();
+const UniversityClass: FC<UniversityClassProps> = ({ start, end, lessons }) => {
   return (
-    <div className={classNames(cls.UnivClass, {}, [className])}>
-      <div className={classNames(cls.time, { [cls.isGoing]: isGoingNow, [cls.lecture]: isLecture}, [])}>
+    <div className={classNames(cls.UnivClass, {}, [])}>
+      <div
+        className={classNames(
+          cls.time,
+          {
+            [cls.isGoing]: start < new Date() && end > new Date(),
+          },
+          []
+        )}
+      >
         <div className={cls.timeStart}>
           {start.toLocaleTimeString('ru', {
             minute: 'numeric',
@@ -32,15 +37,18 @@ const UniversityClass: FC<UniversityClassProps> = ({ className, start, end, isLe
           })}
         </div>
       </div>
-      <div className={cls.content}>
-        <div>
-          <div className={cls.subject}>{subject}</div>
-          <div className={cls.teacherName}>{teacher}</div>
-        </div>
-        <div className={cls.classRoom}>{auditorium}</div>
-      </div>
+
+      {
+        lessons.length > 0 && <UniversityLesson
+          key={lessons[0].name}
+          start={start}
+          end={end}
+          subject={lessons[0].name}
+          type={lessons[0].type}
+          teachers={lessons[0].teachers}
+        />
+      }
     </div>
   );
 };
-
 export { UniversityClass };

@@ -6,6 +6,7 @@
   height: 48px;
   flex: 1 0;
   min-width: 400px;
+  position: relative;
 }
 
 .input {
@@ -19,6 +20,7 @@
   font-weight: 400;
   line-height: 24px;
   color: $text_tertiary_default;
+
 }
 
 .button {
@@ -26,6 +28,20 @@
   border-radius: 2px;
 }
 
+.suggestions {
+  position: absolute;
+  top: 49px;
+  left: 0;
+  width: 100%;
+  height: 500%;
+  background-color: #fff;
+  overflow-y: scroll;
+  z-index: 10;
+}
+.suggestionItem {
+  padding: 10px;
+  border-bottom: 1px solid $stroke_text_disabled;
+}
 @media screen and (max-width: 1200px){
     .inputContainer {
       order: 1;
