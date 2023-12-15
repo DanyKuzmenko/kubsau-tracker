@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { TaskType } from 'app/types/types';
+import { ClassType, TaskType } from 'app/types/types';
 import { TaskItem } from 'features/TaskItem/TaskItem';
 import { UniversityClass } from 'features/UniversityClass';
 import { classNames } from 'shared/lib/classNames';
@@ -11,12 +11,13 @@ import cls from './Card.module.scss';
 
 interface CardProps {
   date: Date;
+  classes?: ClassType[]
   tasks?: TaskType[];
   isVisible?: boolean;
   setIsVisible?: (set: boolean) => void
 }
 
-const Card: FC<CardProps> = ({ date, tasks, setIsVisible, isVisible }) => {
+const Card: FC<CardProps> = ({ date, tasks, setIsVisible, isVisible, classes }) => {
   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
   const isToday = date.getDate() === new Date().getDate();
@@ -32,17 +33,15 @@ const Card: FC<CardProps> = ({ date, tasks, setIsVisible, isVisible }) => {
         </div>
       </header>
       <div className={cls.cardContent}>
-          {lessons && <div className={classNames(cls.univClass, {}, [])}>
-              {lessons.map((item) => {
-                  return <UniversityClass
-                      key={item.number}
-                      start={timeStart(date, item.number)}
-                      end={timeEnd(date, item.number)} isLecture={item.isLecture}
-                      subject={item.subject}
-                      auditorium={item.auditorium}
-                      teacher={item.teacher}
-
-                  />;
+          {classes && <div className={classNames(cls.univClass, {}, [])}>
+              {
+                classes.map((item) => {
+                return <UniversityClass
+                  key={item.number}
+                  start={timeStart(date, item.number)}
+                  end={timeEnd(date, item.number)}
+                  lessons={item.lessons}
+                />
               })}
           </div>
           }

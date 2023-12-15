@@ -7,12 +7,14 @@ import { Card } from 'widgets/Card';
 import { Filters } from 'widgets/Filters';
 
 import cls from './Tasks.module.scss';
+import { weeks } from 'features/WeekButtons/ui/WeekButtons';
 
 
 const Tasks = () => {
     const [isModalVisible, setIsModalVisible] = useState(false)
     const [cards, setCards] = useState<TaskCardType[]>();
     const refObject = useRef(null);
+    const [week, setWeek] = useState<weeks>('cur');
     const handleClick = (evt: React.MouseEvent) => {
         if (evt.target === refObject.current) {
             setIsModalVisible(false)
@@ -28,7 +30,7 @@ const Tasks = () => {
 
   return (
       <>
-          <Filters selectedPage={'tasks'}/>
+          <Filters selectedPage={'tasks'} week={week} setWeek={setWeek}/>
         {
           cards && <section ref={refObject} onClick={handleClick} className={classNames(cls.tasks,
                 {[cls.modalVisible]: isModalVisible}, [])}>

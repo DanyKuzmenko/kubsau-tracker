@@ -39,20 +39,20 @@ type DayType = {
     classes: ClassType[]
 }
 
-type ClassType = {
+export type ClassType = {
     number: number;
     start: string;
     finish: string;
     lessons: LessonType[] | [] | null;  //Отсутствие лекции в GetByRoom - null | в GetByGroup - []
 }
 
-type LessonType = {
+export type LessonType = {
     name: string;
     type: "lec" | "pract" | "";
     teachers: TeacherType[]
 }
 
-type TeacherType = {
+export type TeacherType = {
     id: string;
     name: string;
     link: string;

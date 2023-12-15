@@ -4,22 +4,25 @@ import {Button, ButtonSize, ButtonTheme} from 'shared/ui/Button';
 
 import cls from './GroupFilter.module.scss';
 
-type FilterStatuses = 'group' | 'room';
+type FilterStatuses = 'groups' | 'rooms';
 
 interface GroupFilterProps {
     searchType: string;
     setSearchType: (arg0: FilterStatuses) => void;
+    setInputValue: (str: string) => void
 }
 
-const GroupFilter: FC<GroupFilterProps> = ({searchType, setSearchType}) => {
+const GroupFilter: FC<GroupFilterProps> = ({searchType, setSearchType, setInputValue}) => {
 
 
     const handleGroupClick = (): void => {
-        setSearchType('group');
+        setSearchType('groups');
+        setInputValue('')
     };
 
     const handleClassroomClick = (): void => {
-        setSearchType('room');
+        setInputValue('')
+        setSearchType('rooms');
     };
 
     return (
@@ -27,7 +30,7 @@ const GroupFilter: FC<GroupFilterProps> = ({searchType, setSearchType}) => {
             <Button
                 theme={ButtonTheme.TERTIARY}
                 size={ButtonSize.XS}
-                className={searchType === 'group' ? cls.active : cls.inactive}
+                className={searchType === 'groups' ? cls.active : cls.inactive}
                 onClick={handleGroupClick}
             >
                 По группе
@@ -35,7 +38,7 @@ const GroupFilter: FC<GroupFilterProps> = ({searchType, setSearchType}) => {
             <Button
                 theme={ButtonTheme.TERTIARY}
                 size={ButtonSize.XS}
-                className={searchType === 'room' ? cls.active : cls.inactive}
+                className={searchType === 'rooms' ? cls.active : cls.inactive}
                 onClick={handleClassroomClick}
             >
                 По аудитории

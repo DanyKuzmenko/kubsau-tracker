@@ -1,59 +1,71 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, { FC, useState } from 'react';
 
+
+import { getGroupById, getGroups, getRoomById, getRooms } from "app/api/api";
 import searchIcon from 'assets/images/searchIcon.svg';
+import { AllGroups, AllRooms } from 'fakeApi/fakeApi';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 
+
+
 import cls from './SearchInput.module.scss';
-import {getGroupById, getGroups, getRoomById, getRooms} from "app/api/api";
+import { ScheduleType } from 'widgets/Filters/ui/Filters';
+
 
 interface SearchInputProps {
     searchType: string;
     setGroupClasses?:() => void;
-    setRoomClasses?: () => void
+    inputValue: string
+    setInputValue: (str: string) => void
 }
 
-const SearchInput: FC<SearchInputProps> = ({ searchType}) => {
+const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputValue}) => {
 
-    type Suggestion = {
-        id: string;
-        name: string;
-    }
 
-    const [inputValue, setInputValue] = useState<string>('');
-    const [suggestions, setSuggestions] = useState<Suggestion[]>();
 
-    useEffect(() => {
-        if (inputValue.length >= 2) {
-            if (searchType === 'group') {
-                getGroups().then(responseData => {
-                    setSuggestions(responseData);
-                });
-            } else {
-                // getRooms().then(responseData => {
-                //     setSuggestions(responseData);
-                // });
-            }
-        } else {
-            setSuggestions([]);
-        }
-    }, [inputValue, searchType]);
-    const filterByName = (name: string) => {
-        return suggestions.filter(({id, name}) => {
-            return name === name;
-        })[0].id
 
+    const [scheduleData, setScheduleData] =
+      useState<ScheduleType>({...AllGroups, ...AllRooms});
+    const [suggestions, setSuggestions] = useState<ScheduleType>();
+    const filterByName = (nameToFind: string) => {
+        if (nameToFind.length <= 2) return scheduleData[searchType].filter(false)
+        return scheduleData[searchType].filter(({_, name}) => {
+            return name.toLowerCase().includes(nameToFind.toLowerCase());
+        })
     }
     const handleInputChange = (e: React.ChangeEvent): void => {
+
         setInputValue((e.target as HTMLInputElement).value);
-        const id = filterByName((e.target as HTMLInputElement).value);
-        if (searchType === 'group') {
-            getGroupById(id).then(res => {
-                // setGroupClasses(res.data)
-            })
+
+        if ((e.target as HTMLInputElement).value.length > 2) {
+            const filteredItems = filterByName((e.target as HTMLInputElement).value);
+            console.log(filteredItems);
+
+            // if (filteredItems.length === 0) return
+
+
+            if (searchType === 'groups') {
+                // getGroupById(id).then(res => {
+                //     // setGroupClasses(res.data)
+                // })
+                setSuggestions({
+                    ...scheduleData,
+                    groups: filteredItems,
+                    rooms: []
+                });
+
+            } else {
+                // getRoomById(id).then(res => {
+                //     // setRoomClasses(res.data)
+                // })
+                setSuggestions({
+                    ...scheduleData,
+                    rooms: filteredItems,
+                    groups: []
+                });
+            }
         } else {
-            getRoomById(id).then(res => {
-                // setRoomClasses(res.data)
-            })
+            setSuggestions(null);
         }
     };
 
@@ -61,14 +73,18 @@ const SearchInput: FC<SearchInputProps> = ({ searchType}) => {
     return (
         <>
             <div className={cls.inputContainer}>
-                <input className={cls.input} onChange={handleInputChange} value={inputValue} placeholder={'Поиск'} />
+                <input
+                  className={cls.input}
+                  onChange={handleInputChange}
+                  value={inputValue}
+                  placeholder={searchType ==='rooms' ? 'Искать по аудитории' : 'Искать по группе'} />
                 <Button theme={ButtonTheme.PRIMARY} className={cls.button}>
                     <img src={searchIcon} alt={'Поиск.'} />
                 </Button>
             </div>
             <div>
-                {suggestions && suggestions.map((item) => {
-                    return <div> {item.name} </div>
+                {suggestions && suggestions[searchType] && suggestions[searchType].map((item) => {
+                    return <div key={item.name}> {item.name} </div>
                 })}
             </div>
         </>
