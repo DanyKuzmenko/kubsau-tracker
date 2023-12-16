@@ -35,12 +35,15 @@
   width: 100%;
   height: 500%;
   background-color: #fff;
-  overflow-y: scroll;
   z-index: 10;
 }
 .suggestionItem {
   padding: 10px;
   border-bottom: 1px solid $stroke_text_disabled;
+  cursor: pointer;
+}
+.suggestionItem:hover {
+  background: $stroke_text_disabled;
 }
 @media screen and (max-width: 1200px){
     .inputContainer {

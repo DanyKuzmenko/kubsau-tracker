@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = 'https://university.kubsau.ru/kubsau/hs/csData/';
+const baseUrl = 'http://it2003.kubsau.ru/api/';
 
 const username = 'ws';
 const password = '1';
@@ -24,7 +24,7 @@ export const getGroups = async () => {
     return response.data;
 }
 export const getGroupById = async (id: string) => {
-    let response = await instance.get(`GetByGroup/${id}`, {});
+    let response = await instance.get(`schedule/${id}`, {});
     return response.data
 }
 export const getRooms = async () => {
@@ -32,6 +32,6 @@ export const getRooms = async () => {
     return response.data
 }
 export const getRoomById = async (id: string) => {
-    let response = await instance.get(`GetByRoom/${id}`, {});
+    let response = await instance.get(`room/${id}`, {});
     return response.data
 }

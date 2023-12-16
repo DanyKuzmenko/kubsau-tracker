@@ -1,11 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Card } from 'widgets/Card';
 import { Filters } from 'widgets/Filters';
 
 import cls from './Schedule.module.scss';
 import {ScheduleData} from "app/types/types";
-import { ByGroupData } from 'fakeApi/fakeApi';
 import { weeks } from 'features/WeekButtons/ui/WeekButtons';
 
 const weekNums = {
@@ -16,17 +15,11 @@ const Schedule: FC = () => {
     const [week, setWeek] = useState<weeks>('cur');
     const [searchType, setSearchType] = useState<'groups'|'rooms'>('groups')
     const [classesInfo, setClassesInfo] = useState<ScheduleData>();
-    useEffect(() => {
-        // axios.get("http://localhost:3000/api/schedule").then(response => {
-        //   setCards(response.data)
-        // })
-        setClassesInfo(ByGroupData)
-    }, []);
 
   return (
     <>
-      <Filters week={week} setWeek={setWeek} selectedPage={'schedule'} searchType={searchType}
-               setSearchType={setSearchType}/>
+      <Filters classesInfo={classesInfo} week={week} setWeek={setWeek} selectedPage={'schedule'} searchType={searchType}
+               setSearchType={setSearchType} setClassesInfo={setClassesInfo}/>
 
       {classesInfo && <section className={cls.schedule}>
           {

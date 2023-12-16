@@ -19,6 +19,9 @@
   color: black;
   white-space: nowrap;
 }
+.hidden {
+  display: none;
+}
 @media screen and (max-width: 560px){
   .button {
     width: 50%;
