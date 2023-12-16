@@ -4,17 +4,18 @@ import {classNames} from 'shared/lib/classNames';
 import {Button, ButtonSize, ButtonTheme} from 'shared/ui/Button';
 
 import cls from './WeekButtons.module.scss';
+import {ScheduleData} from "app/types/types";
 
 export type weeks = 'cur' | 'next';
 
 interface WeekButtonsProps {
-  week: weeks;
-  setWeek: (week: weeks) => void;
- }
+    week: weeks;
+    setWeek: (week: weeks) => void;
+    classesInfo: ScheduleData
 
-const WeekButtons: FC<WeekButtonsProps> = ({week, setWeek}) => {
+}
 
-
+const WeekButtons: FC<WeekButtonsProps> = ({week, setWeek, classesInfo}) => {
     const handleCurrentWeekClick = (): void => {
         setWeek('cur');
     };
@@ -24,8 +25,9 @@ const WeekButtons: FC<WeekButtonsProps> = ({week, setWeek}) => {
     };
 
     return (
-        <div className={cls.weekButtons}>
+        <div className={classNames(cls.weekButtons, {[cls.hidden]: classesInfo === undefined}, [])}>
             <Button
+
                 onClick={handleCurrentWeekClick}
                 theme={ButtonTheme.TERTIARY}
                 size={ButtonSize.XS}
@@ -34,6 +36,7 @@ const WeekButtons: FC<WeekButtonsProps> = ({week, setWeek}) => {
                 Текущая неделя
             </Button>
             <Button
+
                 onClick={handleNextWeekClick}
                 theme={ButtonTheme.TERTIARY}
                 size={ButtonSize.XS}
