@@ -11,10 +11,11 @@ interface UniversityLessonProps {
     teachers: TeacherType[];
     subject: string;
     date: Date
+    lessonId: string
 }
 
 const UniversityLesson: FC<UniversityLessonProps> = ({teachers, subject,
-                                                         type, date }) => {
+                                                         type, date,lessonId }) => {
     const refObject = useRef(null);
     const handleClick = (evt: React.MouseEvent) => {
         if (evt.target === refObject.current) {
@@ -35,14 +36,15 @@ const UniversityLesson: FC<UniversityLessonProps> = ({teachers, subject,
                     }, [])}>{subject}</div>
                     {teachers.map((teacher) => (
                         <div
-                            key={teacher._id}
+                            key={teacher.id}
                             className={cls.teacherName}>{teacher.name}</div>
                     ))}
                 </div>
                 <div className={cls.classRoom}>{teachers[0]?.room}</div>
             </div>
             <ModalTask
-                checkboxes={null}
+                checkboxes={[]}
+                lessonId={lessonId}
                 date={date}
                 subject={subject}
                 teachers={teachers}

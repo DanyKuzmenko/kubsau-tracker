@@ -18,7 +18,6 @@ const Tasks = () => {
     useEffect(() => {
        getTasks().then(res => {
            setCards(res)
-           console.log(res)
         })
     }, []);
 

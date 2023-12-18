@@ -1,5 +1,6 @@
 export type TaskType = {
-  _id: string
+  _id?: string
+  lessonId: string
   title: string
   subject: string
   teachers: TeacherType[]
@@ -49,14 +50,15 @@ export type ClassType = {
 export type LessonType = {
     name: string;
     type: "lec" | "pract" | "";
-    teachers: TeacherType[]
+    teachers: TeacherType[];
+    _id?: string
 }
 
 export type TeacherType = {
-    _id: string;
+    id: string;
     name: string;
     link: string;
     isOnline: boolean;
     room: string;
-    online: string
+    online: string;
 }
