@@ -1,21 +1,12 @@
 import axios from "axios";
+import {CheckboxType} from "../types/types";
 
 const baseUrl = 'http://it2003.kubsau.ru/api/';
 
-const username = 'ws';
-const password = '1';
-const token = 'hi9318jdmi32odMoiwjd2owc';
 
-const basicAuth = 'Basic ' + btoa(username + ':' + password);
-
-const headers = {
-    'Token': token,
-    Authorization: basicAuth,
-};
 
 const instance = axios.create({
     baseURL: baseUrl,
-    headers: headers
 })
 
 
@@ -34,4 +25,26 @@ export const getRooms = async () => {
 export const getRoomById = async (id: string) => {
     let response = await instance.get(`room/${id}`, {});
     return response.data
+}
+export const getTasks = async () => {
+    let response = await instance.get(`tasks`, {});
+    return response.data
+}
+export const createTask = async (date: Date, task: TaskType) => {
+    let response = await instance.post(`tasks`, {
+
+    });
+    return response.data
+}
+
+
+type TaskType = {
+    title: string,
+    subject: string,
+    teacher: string,
+    isDone: boolean,
+    deadline: Date,
+    description: string,
+    checkboxes: CheckboxType[]
+    lessonId: string,
 }

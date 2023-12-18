@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 
 import {TaskCardType} from 'app/types/types';
-import {TaskCards} from 'fakeApi/fakeApi';
 import {classNames} from 'shared/lib/classNames';
 import {Card} from 'widgets/Card';
 import {Filters} from 'widgets/Filters';
 
 import cls from './Tasks.module.scss';
 import {weeks} from 'features/WeekButtons/ui/WeekButtons';
-import {Pages} from "../../../features/SelectedPageLinks/ui/SelectedPageLinks";
+import {Pages} from "features/SelectedPageLinks/ui/SelectedPageLinks";
+import {getTasks} from "app/api/api";
 
 
 const Tasks = () => {
@@ -16,11 +16,10 @@ const Tasks = () => {
     const [week, setWeek] = useState<weeks>('cur');
 
     useEffect(() => {
-        // axios.get("http://localhost:3000/api/tasks").then(response => {
-        //   setCards(response.data)
-        // })
-        setCards(TaskCards)
-
+       getTasks().then(res => {
+           setCards(res)
+           console.log(res)
+        })
     }, []);
 
     return (
@@ -28,8 +27,8 @@ const Tasks = () => {
             <Filters selectedPage={Pages.TASKS} week={week} setWeek={setWeek}/>
             {
                 cards && <section className={classNames(cls.tasks, {}, [])}>
-                    {cards.map((item) => {
-                        return <Card key={item.id} date={new Date(item.date)} tasks={item.tasks}/>
+                    {cards.map((card) => {
+                        return <Card key={card._id} date={new Date(card.date)} tasks={card.tasks}/>
                     })}
               </section>
             }

@@ -1,15 +1,15 @@
 import { TaskCardType } from 'app/types/types';
 export const TaskCards: TaskCardType[] = [
   {
-    id: '1',
+    _id: '1',
     date: '2023-12-12T00:00:00.000Z',
     tasks: [
       {
-        id: '1',
+        _id: '1',
         title: 'Сделать лабораторную работу',
         subject: 'Основы веб-инжиниринга',
         teachers: [{
-          id: '1',
+          _id: '1',
           link: '',
           isOnline: false,
           online: '',
@@ -22,17 +22,17 @@ export const TaskCards: TaskCardType[] = [
         description: 'Лабораторная работа №1, .htaccess',
         checkboxes: [
           {
-            id: '1',
+            _id: '1',
             title: 'Открыть вебшторм',
             isDone: true,
           },
           {
-            id: '2',
+            _id: '2',
             title: 'Сделать лабораторочку',
             isDone: false,
           },
           {
-            id: '3',
+            _id: '3',
             title: 'Закрыть вебшторм',
             isDone: true,
           },

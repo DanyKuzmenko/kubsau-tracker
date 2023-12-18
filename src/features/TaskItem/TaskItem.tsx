@@ -1,11 +1,10 @@
 import React, {FC, useRef, useState} from 'react';
-
-import {CheckboxType, TeacherType} from 'app/types/types';
 import {classNames} from 'shared/lib/classNames/classNames';
 import {CheckBox} from 'shared/ui/CheckBox';
 import {ModalTask} from 'widgets/ModalTask/ModalTask';
 
 import cls from './TaskItem.module.scss';
+import {CheckboxType, TeacherType} from "app/types/types";
 
 
 interface TaskItemProps {
@@ -13,23 +12,22 @@ interface TaskItemProps {
     title: string;
     subject: string;
     isDone: boolean;
-    checkboxes: CheckboxType[];
-    deadline: string;
     teachers: TeacherType[];
+    date: Date
+    checkboxes: CheckboxType[];
     description: string;
+    deadline: Date
 }
 
 const TaskItem: FC<TaskItemProps> = ({
-                                         className, title, subject, isDone, description,
-                                         deadline, checkboxes, teachers
+                                         className, title, subject, isDone,
+                                         teachers, date, checkboxes, description,deadline
                                      }) => {
 
     const [isModalVisible, setIsModalVisible] = useState(false)
     const refObject = useRef(null);
     const handleClick = (evt: React.MouseEvent) => {
-        console.log("Click")
         if (evt.target === refObject.current) {
-            console.log('log')
             setIsModalVisible(false)
         }
     }
@@ -55,14 +53,16 @@ const TaskItem: FC<TaskItemProps> = ({
                 </div>
             </div>
             <ModalTask
+                checkboxes={checkboxes}
+                date={date}
                 title={title}
                 subject={subject}
                 isDone={isDone}
-                deadline={deadline}
                 teachers={teachers}
                 description={description}
                 isVisible={isModalVisible}
                 setIsVisible={setIsModalVisible}
+                deadline={deadline}
 
             />
             <span onClick={handleClick} ref={refObject}

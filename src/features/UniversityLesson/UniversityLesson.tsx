@@ -2,18 +2,19 @@ import React, {FC, useRef, useState} from 'react';
 
 import {TeacherType} from 'app/types/types';
 import cls from './UniversityLesson.module.scss';
-import {classNames} from "../../shared/lib/classNames";
-import {ModalTask} from "../../widgets/ModalTask/ModalTask";
+import {classNames} from "shared/lib/classNames";
+import {ModalTask} from "widgets/ModalTask/ModalTask";
 
 interface UniversityLessonProps {
     className?: string;
     type: 'lec' | 'pract' | '';
     teachers: TeacherType[];
     subject: string;
+    date: Date
 }
 
 const UniversityLesson: FC<UniversityLessonProps> = ({teachers, subject,
-                                                         type}) => {
+                                                         type, date }) => {
     const refObject = useRef(null);
     const handleClick = (evt: React.MouseEvent) => {
         if (evt.target === refObject.current) {
@@ -34,13 +35,15 @@ const UniversityLesson: FC<UniversityLessonProps> = ({teachers, subject,
                     }, [])}>{subject}</div>
                     {teachers.map((teacher) => (
                         <div
-                            key={teacher.id}
+                            key={teacher._id}
                             className={cls.teacherName}>{teacher.name}</div>
                     ))}
                 </div>
                 <div className={cls.classRoom}>{teachers[0]?.room}</div>
             </div>
             <ModalTask
+                checkboxes={null}
+                date={date}
                 subject={subject}
                 teachers={teachers}
                 isVisible={isModalVisible}

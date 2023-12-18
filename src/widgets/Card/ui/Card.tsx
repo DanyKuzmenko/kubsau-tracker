@@ -46,14 +46,15 @@ const Card: FC<CardProps> = ({date, tasks, classes}) => {
                 {tasks && <div>
                     {tasks.map((item) => {
                         return <TaskItem
-                            key={item.id}
+                            description={item.description}
+                            date={date}
+                            key={item._id}
                             subject={item.subject}
                             title={item.title}
                             isDone={item.isDone}
-                            checkboxes={item.checkboxes}
                             teachers={item.teachers}
-                            description={item.description}
-                            deadline={item.deadline}
+                            checkboxes={item.checkboxes}
+                            deadline={new Date(item.deadline)}
                         />
                     })}
                 </div>}
