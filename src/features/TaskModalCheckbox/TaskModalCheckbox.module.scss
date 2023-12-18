@@ -1,5 +1,21 @@
+@import 'src/app/styles';
+
 .TaskModalCheckbox {
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  position: relative;
+  color: $text_tertiary_default;
 }
+.svgContainer {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+}
+.TaskModalCheckbox:hover {
+ color: #151615;
+}
+.TaskModalCheckbox:hover .svgContainer {
+  opacity: 1;
+}
+

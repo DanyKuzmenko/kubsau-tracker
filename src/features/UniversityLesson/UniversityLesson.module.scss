@@ -24,7 +24,19 @@
   padding: 8px 8px 0 8px;
   min-height: 68px;
 }
-
+.modalBack {
+  display: none;
+}
+.modalBack.modalOpen {
+  display: block;
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(7, 7, 6, 0.12);
+}
 .subject {
   font-size: 14px;
   margin-bottom: 4px;
@@ -37,6 +49,7 @@
 }
 .mainContent {
   padding-right: 20px;
+  padding-bottom: 10px;
 }
 .isGoing {
   color: $danger_main;

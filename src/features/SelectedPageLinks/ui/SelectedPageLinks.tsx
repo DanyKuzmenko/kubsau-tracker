@@ -7,9 +7,12 @@ import { classNames } from 'shared/lib/classNames';
 import cls from './SelectedPageLinks.module.scss';
 
 
-export type SelectedLink = 'schedule' | 'tasks';
+export enum Pages {
+    SCHEDULE = 'schedule',
+    TASKS = 'tasks'
+}
 interface SelectedPageLinksProps {
-    selectedPage: SelectedLink
+    selectedPage: Pages
 }
 
 

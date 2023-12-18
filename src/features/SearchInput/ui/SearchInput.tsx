@@ -1,7 +1,7 @@
-import React, {FC, useState, KeyboardEvent } from 'react';
+import React, {FC, useState, KeyboardEvent} from 'react';
 
 
-import {getGroupById } from "app/api/api";
+import {getGroupById} from "app/api/api";
 import searchIcon from 'assets/images/searchIcon.svg';
 import {AllGroups, AllRooms} from 'fakeApi/fakeApi';
 import {Button, ButtonTheme} from 'shared/ui/Button';
@@ -9,6 +9,8 @@ import {Button, ButtonTheme} from 'shared/ui/Button';
 
 import cls from './SearchInput.module.scss';
 import {ScheduleData} from "app/types/types";
+import {Simulate} from "react-dom/test-utils";
+import Loader from "../../../shared/ui/Loader/Loader";
 
 
 interface SearchInputProps {
@@ -38,6 +40,7 @@ const SearchInput: FC<SearchInputProps> = ({
     const [groupsAndRoomsData, _] =
         useState<ScheduleType>({...AllGroups, ...AllRooms});
     const [suggestions, setSuggestions] = useState<ScheduleType>();
+    const [isFetching, setIsFetching] = useState(false)
     const filterByName = (nameToFind: string) => {
         if (nameToFind.length <= 2) return groupsAndRoomsData[searchType].filter(false)
         return groupsAndRoomsData[searchType].filter(({_, name}) => {
@@ -76,6 +79,7 @@ const SearchInput: FC<SearchInputProps> = ({
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             handleButtonClick();
+            setSuggestions(null)
         }
     };
     const handleButtonClick = async () => {
@@ -88,18 +92,17 @@ const SearchInput: FC<SearchInputProps> = ({
         })
         if (filtered.length === 0) {
             setInputValue('')
-            console.log(filtered)
             return
         }
 
         let res: ScheduleData
-
+        setIsFetching(true)
         if (searchType === 'rooms') {
             res = null
         } else {
             res = await getGroupById(filtered[0].id);
         }
-
+        setIsFetching(false)
         setClassesInfo(res);
     }
 
@@ -114,9 +117,14 @@ const SearchInput: FC<SearchInputProps> = ({
                     onChange={handleInputChange}
                     value={inputValue}
                     placeholder={searchType === 'rooms' ? 'Искать по аудитории' : 'Искать по группе'}/>
-                <Button onClick={handleButtonClick} theme={ButtonTheme.PRIMARY} className={cls.button}>
-                    <img src={searchIcon} alt={'Поиск.'}/>
-                </Button>
+                {!isFetching
+                    ? <Button onClick={handleButtonClick} theme={ButtonTheme.PRIMARY} className={cls.button}>
+                        <img src={searchIcon} alt={'Поиск.'}/>
+                    </Button>
+                    : <Button theme={ButtonTheme.PRIMARY} className={cls.button + " " + cls.loaderButton}>
+                        <Loader className={cls.loader}/>
+                    </Button>
+                }
                 {suggestions && <div className={cls.suggestions}
                                      style={{height: suggestions[searchType].length * 40 + 'px'}}>
                     {suggestions[searchType] && suggestions[searchType].map((item) => {

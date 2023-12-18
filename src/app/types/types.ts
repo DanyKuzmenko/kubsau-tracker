@@ -1,21 +1,21 @@
 export type TaskType = {
-  id: string
+  _id: string
   title: string
   subject: string
-  teacher: string
+  teachers: TeacherType[]
   isDone: boolean
   deadline: string
   description: string
   checkboxes: CheckboxType[]
 }
 export type CheckboxType = {
-    id: string;
+    _id: string;
     title: string;
     isDone: boolean;
 }
 
 export type TaskCardType = {
-  id: string;
+  _id: string;
   date: string;
   tasks: TaskType[]
 }
@@ -53,7 +53,7 @@ export type LessonType = {
 }
 
 export type TeacherType = {
-    id: string;
+    _id: string;
     name: string;
     link: string;
     isOnline: boolean;
