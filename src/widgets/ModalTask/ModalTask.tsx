@@ -7,6 +7,7 @@ import {CheckBox} from 'shared/ui/CheckBox';
 
 import cls from './ModalTask.module.scss';
 import {Button, ButtonSize, ButtonTheme} from "../../shared/ui/Button";
+import {createTask} from "../../app/api/api";
 
 
 interface ModalTaskProps {
@@ -21,21 +22,24 @@ interface ModalTaskProps {
     checkboxes?: CheckboxType[]
     description?: string
     deadline?: Date
+    lessonId: string
 }
 
 const ModalTask: FC<ModalTaskProps> = ({
                                            className, title, teachers, subject,
                                            isDone, isVisible, setIsVisible, date,
-                                           checkboxes,description,  deadline
+                                           checkboxes,description,  deadline,lessonId
                                        }) => {
-    const [hasFetched, setHasFetched] = useState<boolean>(true);
     const [checkboxEditMode, setCheckboxEditMode] = useState(false)
-    const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+    const checkboxInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+    const titleInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+    const deadlineInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+    const descriptionInput: RefObject<HTMLTextAreaElement> = useRef<HTMLTextAreaElement>(null);
     const [inputValue, setInputValue] = useState('');
     const [localCheckboxes, setLocalCheckboxes] = useState<CheckboxType[]>([]);
     useEffect(() => {
         // Устанавливаем фокус при появлении инпута
-        inputRef.current?.focus();
+        checkboxInput.current?.focus();
     }, [checkboxEditMode]);
     const handleAddCheckbox = () => {
         if (inputValue.trim() !== '') {
@@ -47,19 +51,36 @@ const ModalTask: FC<ModalTaskProps> = ({
             setCheckboxEditMode(false);
         }
     };
+    const handleSubmit = () => {
+
+        const task = {
+            title: titleInput.current?.value ? titleInput.current.value : title,
+            subject: subject,
+            teacher: 'Ну тичер',
+            isDone: false,
+            deadline: deadlineInput.current?.value ? new Date(deadlineInput.current.value) : deadline,
+            description: descriptionInput.current?.value ? descriptionInput.current.value : description,
+            checkboxes: localCheckboxes,
+            lessonId: lessonId,
+        }
+        createTask(date, task).then(res => {
+            console.log(res)
+        })
+    }
     const closeModal = () => {
         setIsVisible(false);
     }
     return (
         <div className={classNames(cls.ModalTask, {[cls.visible]: isVisible},
             [className])}>
-            {hasFetched && <div className={cls.content}>
+            {<div className={cls.content}>
               <div className={cls.windowHeader}>
                 <CheckBox isDone={isDone}/>
                   {title
                       ? <h1 className={cls.title}>{title}</h1>
                       :
-                      <input placeholder={"Введите название задачи"} className={cls.titleInput}></input>
+                      <input ref={titleInput}  placeholder={title ? title : "Введите наименование задачи"}
+                             className={cls.titleInput}></input>
                   }
               </div>
               <div className={cls.deadline}>
@@ -74,7 +95,18 @@ const ModalTask: FC<ModalTaskProps> = ({
                                 weekday: "long"
                             })
                         :
-                        <input placeholder={"Введите дату"} className={cls.deadlineInput}></input>
+                        <input
+                            ref={deadlineInput}
+                            placeholder={deadline ? deadline.toLocaleDateString('ru', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                            }): new Date().toLocaleDateString('ru', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                            })}
+                            className={cls.deadlineInput}></input>
                     }
                 </div>
               </div>
@@ -102,7 +134,7 @@ const ModalTask: FC<ModalTaskProps> = ({
                         ?
                         <input
                             className={cls.checkboxesInput}
-                            ref={inputRef}
+                            ref={checkboxInput}
                             type="text"
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
@@ -129,14 +161,16 @@ const ModalTask: FC<ModalTaskProps> = ({
                       ?
                       <div className={cls.descriptionBody}>{description}</div>
                       :
-                      <textarea rows={6} className={cls.descriptionInput}
-                                placeholder={"Напишите описание к задаче"}></textarea>
+                      <textarea
+                          ref={descriptionInput} rows={6} className={cls.descriptionInput}
+                          placeholder={description ? description : "Напишите описание к задаче"}>
+                      </textarea>
                   }
               </div>
 
 
               <Button
-                onClick={() => alert('Вы чмо')}
+                onClick={handleSubmit}
                 className={cls.saveButton}
                 theme={ButtonTheme.PRIMARY}
               >Сохранить</Button>

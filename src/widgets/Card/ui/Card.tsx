@@ -46,6 +46,7 @@ const Card: FC<CardProps> = ({date, tasks, classes}) => {
                 {tasks && <div>
                     {tasks.map((item) => {
                         return <TaskItem
+                            lessonId={item._id}
                             description={item.description}
                             date={date}
                             key={item._id}

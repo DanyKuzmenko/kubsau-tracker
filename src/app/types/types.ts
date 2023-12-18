@@ -49,7 +49,8 @@ export type ClassType = {
 export type LessonType = {
     name: string;
     type: "lec" | "pract" | "";
-    teachers: TeacherType[]
+    teachers: TeacherType[];
+    _id?: string
 }
 
 export type TeacherType = {

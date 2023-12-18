@@ -42,6 +42,7 @@ const UniversityClass: FC<UniversityClassProps> = ({start, end, lessons}) => {
             {
                 lessons.length > 0 && <UniversityLesson
                 date={new Date(start)}
+                lessonId={lessons[0]._id}
                 key={lessons[0].name}
                 subject={lessons[0].name}
                 type={lessons[0].type}

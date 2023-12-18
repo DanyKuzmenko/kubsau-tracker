@@ -32,7 +32,17 @@ export const getTasks = async () => {
 }
 export const createTask = async (date: Date, task: TaskType) => {
     let response = await instance.post(`tasks`, {
-
+        date: date,
+        task: {
+            title: task.title,
+            subject: task.subject,
+            teacher: task.teacher,
+            isDone: task.isDone,
+            deadline: task.deadline,
+            description: task.description,
+            checkboxes: task.checkboxes,
+            lessonId: task.lessonId,
+        }
     });
     return response.data
 }

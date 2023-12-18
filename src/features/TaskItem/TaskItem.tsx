@@ -17,11 +17,13 @@ interface TaskItemProps {
     checkboxes: CheckboxType[];
     description: string;
     deadline: Date
+    lessonId: string
 }
 
 const TaskItem: FC<TaskItemProps> = ({
                                          className, title, subject, isDone,
-                                         teachers, date, checkboxes, description,deadline
+                                         teachers, date, checkboxes,
+                                         description,deadline,lessonId
                                      }) => {
 
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -53,6 +55,7 @@ const TaskItem: FC<TaskItemProps> = ({
                 </div>
             </div>
             <ModalTask
+                lessonId={lessonId}
                 checkboxes={checkboxes}
                 date={date}
                 title={title}
