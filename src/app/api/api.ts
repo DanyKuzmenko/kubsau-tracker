@@ -61,6 +61,15 @@ export const patchTask = async (id: string, task: TaskType) => {
   return response.data;
 };
 
+export const deleteTask = async (lessonID: string, date: Date) => {
+  let response = await instance.delete(`tasks/`+lessonID,{
+    data: {
+      date: date
+    }
+  },);
+  return response.data;
+}
+
 export const createCheckbox = async (title: string, lessonId: string) => {
   let response = await instance.post(`tasks/checkbox`, {
     title: title,

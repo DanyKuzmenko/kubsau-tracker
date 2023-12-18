@@ -1,6 +1,6 @@
 import React, { FC, RefObject, useEffect, useRef, useState } from 'react';
 
-import { createCheckbox, createTask, getTasksById, patchTask } from 'app/api/api';
+import { createCheckbox, createTask, deleteTask, getTasksById, patchTask } from 'app/api/api';
 import { CheckboxType, TaskType, TeacherType } from 'app/types/types';
 import { TaskModalCheckbox } from 'features/TaskModalCheckbox/TaskModalCheckbox';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -11,7 +11,6 @@ import cls from './ModalTask.module.scss';
 
 interface ModalTaskProps {
   className?: string;
-  title?: string;
   subject?: string;
   teachers?: TeacherType[];
   isDone?: boolean;
@@ -19,14 +18,11 @@ interface ModalTaskProps {
   setIsVisible: (set: boolean) => void;
   date: Date;
   checkboxes?: CheckboxType[];
-  description?: string;
-  deadline?: Date;
   lessonId: string;
 }
 
 const ModalTask: FC<ModalTaskProps> = ({
   className,
-  title,
   teachers,
   subject,
   isDone,
@@ -34,8 +30,6 @@ const ModalTask: FC<ModalTaskProps> = ({
   setIsVisible,
   date,
   checkboxes,
-  description,
-  deadline,
   lessonId,
 }) => {
   const [taskEditMode, setTaskEditMode] = useState(false);
@@ -72,6 +66,9 @@ const ModalTask: FC<ModalTaskProps> = ({
     })
     console.log('taskData', taskData);
   };
+  const handleDelete = (lessonId: string, date: Date) => {
+    deleteTask(lessonId, date)
+  }
   const handleSubmit = () => {
     setTaskEditMode(false);
 
@@ -97,6 +94,7 @@ const ModalTask: FC<ModalTaskProps> = ({
   };
   const closeModal = () => {
     setIsVisible(false);
+
   };
   return (
     <div className={classNames(cls.ModalTask, { [cls.visible]: isVisible }, [className])}>
@@ -211,9 +209,12 @@ const ModalTask: FC<ModalTaskProps> = ({
 
         <div>
           {taskEditMode ? (
-            <Button onClick={handleSubmit} className={cls.saveButton} theme={ButtonTheme.PRIMARY}>
+            <div>
+              <Button onClick={handleSubmit} className={cls.saveButton} theme={ButtonTheme.PRIMARY}>
               Сохранить
             </Button>
+              <button onClick={() => handleDelete}>Удалить</button>
+            </div>
           ) : (
             <Button onClick={() => setTaskEditMode(true)} theme={ButtonTheme.PRIMARY} className={cls.saveButton}>
               Редактировать

@@ -58,15 +58,11 @@ const TaskItem: FC<TaskItemProps> = ({
                 lessonId={lessonId}
                 checkboxes={checkboxes}
                 date={date}
-                title={title}
                 subject={subject}
                 isDone={isDone}
                 teachers={teachers}
-                description={description}
                 isVisible={isModalVisible}
                 setIsVisible={setIsModalVisible}
-                deadline={deadline}
-
             />
             <span onClick={handleClick} ref={refObject}
                   className={classNames(cls.taskModal, {[cls.modalOpen]: isModalVisible},[])}></span>
