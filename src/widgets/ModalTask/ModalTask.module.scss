@@ -8,7 +8,7 @@
   top: 36px;
 
   left: calc(50% - (var(--window-width) / 2));
-  padding: 40px 44px;
+  padding: 40px 44px 100px 44px;
   border-radius: 24px;
   min-height: calc(100% - 144px);
 }
@@ -125,9 +125,13 @@ button.checkboxesButton {
   margin-top: 10px;
 }
 button.saveButton {
+  --btn-width: 400px;
   padding: 10px 20px;
-  width: 400px;
-  margin: 0 auto;
+  width: var(--btn-width);
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% - (var(--btn-width) / 2));
+
 }
 .checkboxesInput {
   border: none;
@@ -139,7 +143,7 @@ button.saveButton {
 @media screen and (max-width: 1180px) {
   .ModalTask {
     --window-width: 70vw;
-    padding: 26px 70px 26px 32px;
+    padding: 26px 70px 100px 32px;
   }
   .title {
     font-size: 24px;
@@ -164,12 +168,11 @@ button.saveButton {
 }
 button.saveButton {
   padding: 10px 20px;
-  width: 300px;
-  margin: 0 auto;
+  --btn-width: 300px;
 }
 @media screen and (max-width: 600px) {
   .ModalTask {
-    padding: 12px 50px 18px 12px;
+    padding: 12px 50px 80px 12px;
   }
   .title {
     font-size: 16px;
@@ -191,6 +194,10 @@ button.saveButton {
   }
   .deadline {
     font-size: 12px;
+  }
+  button.saveButton {
+    padding: 10px 20px;
+    --btn-width: 60%;
   }
 
 }

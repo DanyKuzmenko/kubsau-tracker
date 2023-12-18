@@ -1,24 +1,22 @@
-import React, {FC, useState, KeyboardEvent} from 'react';
+import React, { FC, KeyboardEvent, useState } from 'react';
 
-
-import {getGroupById} from "app/api/api";
+import { getGroupById } from 'app/api/api';
+import { ScheduleData } from 'app/types/types';
 import searchIcon from 'assets/images/searchIcon.svg';
-import {AllGroups, AllRooms} from 'fakeApi/fakeApi';
-import {Button, ButtonTheme} from 'shared/ui/Button';
+import { AllGroups, AllRooms } from 'fakeApi/fakeApi';
+import { Pages } from 'features/SelectedPageLinks/ui/SelectedPageLinks';
+import { Button, ButtonTheme } from 'shared/ui/Button';
 
-
+import Loader from '../../../shared/ui/Loader/Loader';
 import cls from './SearchInput.module.scss';
-import {ScheduleData} from "app/types/types";
-import {Simulate} from "react-dom/test-utils";
-import Loader from "../../../shared/ui/Loader/Loader";
-
 
 interface SearchInputProps {
-    searchType: string;
-    setGroupClasses?: () => void;
-    inputValue: string
-    setInputValue: (str: string) => void
-    setClassesInfo: (ScheduleData: ScheduleData) => void
+  searchType: string;
+  setGroupClasses?: () => void;
+  inputValue: string;
+  setInputValue: (str: string) => void;
+  setClassesInfo: (ScheduleData: ScheduleData) => void;
+  selectedPage: Pages;
 }
 
 export type ScheduleType = {
@@ -33,7 +31,7 @@ export type ScheduleType = {
 }
 const SearchInput: FC<SearchInputProps> = ({
                                                searchType, inputValue,
-                                               setInputValue, setClassesInfo
+                                               setInputValue, setClassesInfo, selectedPage
                                            }) => {
 
 
@@ -108,8 +106,8 @@ const SearchInput: FC<SearchInputProps> = ({
 
 
     return (
-        <>
-            <div className={cls.inputContainer}>
+      <>
+          {selectedPage === Pages.SCHEDULE && <div className={cls.inputContainer}>
                 <input
                     onKeyDown={handleKeyDown}
                     onBlur={handleFocusOut}
@@ -139,7 +137,7 @@ const SearchInput: FC<SearchInputProps> = ({
                     })}
                 </div>}
             </div>
-
+          }
         </>
 
 

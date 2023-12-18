@@ -36,7 +36,7 @@ const UniversityLesson: FC<UniversityLessonProps> = ({teachers, subject,
                     }, [])}>{subject}</div>
                     {teachers.map((teacher) => (
                         <div
-                            key={teacher._id}
+                            key={teacher.id}
                             className={cls.teacherName}>{teacher.name}</div>
                     ))}
                 </div>

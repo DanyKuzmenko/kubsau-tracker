@@ -29,7 +29,7 @@ const Filters = ({selectedPage, searchType, setSearchType, week, setWeek, setCla
             <div className={cls.container}>
                 <GroupFilter selectedPage={selectedPage} setInputValue={setInputValue} searchType={searchType}
                              setSearchType={setSearchType}/>
-                <SearchInput setClassesInfo={setClassesInfo} setInputValue={setInputValue}
+                <SearchInput selectedPage={selectedPage} setClassesInfo={setClassesInfo} setInputValue={setInputValue}
                              inputValue={inputValue} searchType={searchType}/>
                 <WeekButtons classesInfo={classesInfo} week={week} setWeek={setWeek}/>
             </div>
