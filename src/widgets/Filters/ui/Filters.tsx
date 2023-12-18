@@ -1,7 +1,7 @@
 import {GroupFilter} from 'features/GroupFilter';
 import {SearchInput} from 'features/SearchInput';
 import {SelectedPageLinks} from 'features/SelectedPageLinks';
-import {SelectedLink} from 'features/SelectedPageLinks/ui/SelectedPageLinks';
+import {Pages} from 'features/SelectedPageLinks/ui/SelectedPageLinks';
 import {WeekButtons} from 'features/WeekButtons';
 
 import cls from './Filters.module.scss';
@@ -11,7 +11,7 @@ import {ScheduleData} from "app/types/types";
 
 
 type Props = {
-    selectedPage: SelectedLink;
+    selectedPage: Pages;
     setSearchType?: (arg0: 'groups' | 'rooms') => void
     searchType?: 'groups' | 'rooms';
     week: weeks;

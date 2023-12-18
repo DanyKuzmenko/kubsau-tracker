@@ -27,7 +27,12 @@
   padding: 12px 28px;
   border-radius: 2px;
 }
-
+.loader {
+  position: absolute;
+}
+.loaderButton {
+  width: 74px;
+}
 .suggestions {
   position: absolute;
   top: 49px;

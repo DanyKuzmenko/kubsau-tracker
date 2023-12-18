@@ -2,7 +2,7 @@ export type TaskType = {
   id: string
   title: string
   subject: string
-  teacher: string
+  teachers: TeacherType[]
   isDone: boolean
   deadline: string
   description: string
