@@ -1,9 +1,8 @@
-import React, { FC, KeyboardEvent, useState } from 'react';
+import React, { FC, KeyboardEvent, useEffect, useState } from 'react';
 
-import { getGroupById } from 'app/api/api';
+import { getGroupById, getGroups } from 'app/api/api';
 import { ScheduleData } from 'app/types/types';
 import searchIcon from 'assets/images/searchIcon.svg';
-import { AllGroups, AllRooms } from 'fakeApi/fakeApi';
 import { Pages } from 'features/SelectedPageLinks/ui/SelectedPageLinks';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 
@@ -19,44 +18,38 @@ interface SearchInputProps {
   selectedPage: Pages;
 }
 
-export type ScheduleType = {
-  groups: {
-    id: string;
-    name: string;
-  }[];
-  rooms: {
-    id: string;
-    name: string;
-  }[];
-};
-const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputValue, setClassesInfo, selectedPage }) => {
-  const [groupsAndRoomsData, _] = useState<ScheduleType>({ ...AllGroups, ...AllRooms });
-  const [suggestions, setSuggestions] = useState<ScheduleType>();
-  const [isFetching, setIsFetching] = useState(false);
-  const filterByName = (nameToFind: string) => {
-    if (nameToFind.length <= 2) return groupsAndRoomsData[searchType].filter(false);
-    return groupsAndRoomsData[searchType].filter(({ _, name }) => {
-      return name.toLowerCase().includes(nameToFind.toLowerCase());
-    });
-  };
-  const handleInputChange = (e: React.ChangeEvent): void => {
-    setInputValue((e.target as HTMLInputElement).value);
+export type GroupType = {
+  id: string;
+  name: string;
+}[];
 
-    if ((e.target as HTMLInputElement).value.length > 2) {
-      const filteredItems = filterByName((e.target as HTMLInputElement).value);
-      if (searchType === 'groups') {
-        setSuggestions({
-          ...groupsAndRoomsData,
-          groups: filteredItems,
-          rooms: [],
-        });
-      } else {
-        setSuggestions({
-          ...groupsAndRoomsData,
-          rooms: filteredItems,
-          groups: [],
-        });
-      }
+const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputValue, setClassesInfo, selectedPage }) => {
+  const [groups, setGroups] = useState<GroupType>([]);
+  const [suggestions, setSuggestions] = useState<GroupType>([]);
+  const [isFetching, setIsFetching] = useState(false);
+
+  useEffect(() => {
+    getGroups()
+      .then((res: GroupType) => {
+        setGroups(res);
+      })
+      .catch((err: any) => {
+        console.log('err', err);
+      });
+  }, []);
+
+  const filterByName = (nameToFind: string) => {
+    return groups.filter(({ id, name }) => name.toLowerCase().includes(nameToFind.toLowerCase()));
+  };
+
+  const handleInputChange = (e: React.ChangeEvent): void => {
+    const targetValue = (e.target as HTMLInputElement).value;
+
+    setInputValue(targetValue);
+
+    if (targetValue.length > 2) {
+      const filteredItems = filterByName(targetValue);
+      setSuggestions(filteredItems);
     } else {
       setSuggestions(null);
     }
@@ -73,13 +66,7 @@ const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputVal
     }
   };
   const handleButtonClick = async () => {
-    const filtered = groupsAndRoomsData[searchType].filter(({ _, name }) => {
-      if (searchType === 'rooms') {
-        return name === inputValue.toLowerCase();
-      } else {
-        return name === inputValue.toUpperCase();
-      }
-    });
+    const filtered = groups.filter(({ id, name }) => name === inputValue.toUpperCase());
     if (filtered.length === 0) {
       setInputValue('');
       return;
@@ -87,11 +74,9 @@ const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputVal
 
     let res: ScheduleData;
     setIsFetching(true);
-    if (searchType === 'rooms') {
-      res = null;
-    } else {
-      res = await getGroupById(filtered[0].id);
-    }
+
+    res = await getGroupById(filtered[0].id);
+
     setIsFetching(false);
     setClassesInfo(res);
   };
@@ -118,9 +103,9 @@ const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputVal
             </Button>
           )}
           {suggestions && (
-            <div className={cls.suggestions} style={{ height: suggestions[searchType].length * 40 + 'px' }}>
-              {suggestions[searchType] &&
-                suggestions[searchType].map((item) => {
+            <div className={cls.suggestions} style={{ height: suggestions.length * 40 + 'px' }}>
+              {suggestions.length !== 0 &&
+                suggestions.map((item) => {
                   return (
                     <div
                       onClick={() => {

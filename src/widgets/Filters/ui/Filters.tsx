@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { ScheduleData } from 'app/types/types';
-import { GroupFilter } from 'features/GroupFilter';
+// import { GroupFilter } from 'features/GroupFilter';
 import { SearchInput } from 'features/SearchInput';
 import { SelectedPageLinks } from 'features/SelectedPageLinks';
 import { Pages } from 'features/SelectedPageLinks/ui/SelectedPageLinks';
@@ -26,12 +26,12 @@ const Filters = ({ selectedPage, searchType, setSearchType, week, setWeek, setCl
     <section className={cls.filters}>
       <SelectedPageLinks selectedPage={selectedPage} />
       <div className={cls.container}>
-        <GroupFilter
-          selectedPage={selectedPage}
-          setInputValue={setInputValue}
-          searchType={searchType}
-          setSearchType={setSearchType}
-        />
+        {/*<GroupFilter*/}
+        {/*  selectedPage={selectedPage}*/}
+        {/*  setInputValue={setInputValue}*/}
+        {/*  searchType={searchType}*/}
+        {/*  setSearchType={setSearchType}*/}
+        {/*/>*/}
         <SearchInput
           selectedPage={selectedPage}
           setClassesInfo={setClassesInfo}

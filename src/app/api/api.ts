@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { GroupType } from '../../features/SearchInput/ui/SearchInput';
 import { CheckboxType, TeacherType } from '../types/types';
 
 const baseUrl = 'http://it2003.kubsau.ru/api/';
@@ -9,8 +10,9 @@ const instance = axios.create({
 });
 
 export const getGroups = async () => {
-  const response = await instance.options(`GetGroups`);
-  return response.data;
+  const response = await instance.get(`groups`);
+
+  return response.data as GroupType;
 };
 export const getGroupById = async (id: string) => {
   let response = await instance.get(`schedule/${id}`, {});
