@@ -22,12 +22,12 @@
 .hidden {
   display: none;
 }
-@media screen and (max-width: 560px){
+@media screen and (max-width: 560px) {
   .button {
     width: 50%;
   }
 }
-@media screen and (max-width: 390px){
+@media screen and (max-width: 390px) {
   .button {
     padding: 8px 5%;
     white-space: unset;

@@ -1,5 +1,4 @@
-@import "src/app/styles";
-
+@import 'src/app/styles';
 
 .ModalTask {
   --window-width: 900px;
@@ -26,7 +25,6 @@
 }
 .windowHeader {
   display: flex;
-
 }
 .title {
   font-size: 32px;
@@ -65,7 +63,10 @@
 .deadlineInput::placeholder {
   font-size: 16px;
 }
-.subject, .teacher, .description, .checkboxes {
+.subject,
+.teacher,
+.description,
+.checkboxes {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -84,22 +85,17 @@
 .deadlineHeader {
   font-size: 14px;
   font-weight: 400;
-  color: $text_secondary_default
+  color: $text_secondary_default;
 }
-
 
 .subjectHeader,
 .descriptionHeader,
 .checkboxesHeader,
-.teacherHeader{
- color: $text_secondary_default;
+.teacherHeader {
+  color: $text_secondary_default;
   font-size: 16px;
   font-weight: 400;
 }
-
-
-
-
 
 .subjectName,
 .teacherName {
@@ -131,7 +127,6 @@ button.saveButton {
   position: absolute;
   bottom: 30px;
   left: calc(50% - (var(--btn-width) / 2));
-
 }
 .checkboxesInput {
   border: none;
@@ -155,7 +150,7 @@ button.saveButton {
   .subjectHeader,
   .descriptionHeader,
   .checkboxesHeader,
-  .teacherHeader{
+  .teacherHeader {
     font-size: 14px;
   }
   .subjectName,
@@ -184,7 +179,7 @@ button.saveButton {
   .subjectHeader,
   .descriptionHeader,
   .checkboxesHeader,
-  .teacherHeader{
+  .teacherHeader {
     font-size: 12px;
   }
   .subjectName,
@@ -199,5 +194,4 @@ button.saveButton {
     padding: 10px 20px;
     --btn-width: 60%;
   }
-
 }
