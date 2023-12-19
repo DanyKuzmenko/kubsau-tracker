@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ClassType, TaskType } from 'app/types/types';
+import { ClassType, TaskCardType, TaskType } from 'app/types/types';
 import { TaskItem } from 'features/TaskItem/TaskItem';
 import { UniversityClass } from 'features/UniversityClass';
 import { classNames } from 'shared/lib/classNames';
@@ -12,9 +12,10 @@ interface CardProps {
   date: Date;
   classes?: ClassType[];
   tasks?: TaskType[];
+  setCards?: (cards: TaskCardType[]) => void
 }
 
-const Card: FC<CardProps> = ({ date, tasks, classes }) => {
+const Card: FC<CardProps> = ({ date, tasks, classes, setCards }) => {
   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
   const isToday = date.getDate() === new Date().getDate();
@@ -49,6 +50,7 @@ const Card: FC<CardProps> = ({ date, tasks, classes }) => {
             {tasks.map((item) => {
               return (
                 <TaskItem
+                  setCards={setCards}
                   lessonId={item.lessonId}
                   description={item.description}
                   date={date}

@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 
-import { CheckboxType, TeacherType } from 'app/types/types';
+import { CheckboxType, TaskCardType, TeacherType } from 'app/types/types';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { CheckBox } from 'shared/ui/CheckBox';
 import { ModalTask } from 'widgets/ModalTask/ModalTask';
@@ -18,6 +18,7 @@ interface TaskItemProps {
   description: string;
   deadline: Date;
   lessonId: string;
+  setCards: (cards: TaskCardType[]) => void
 }
 
 const TaskItem: FC<TaskItemProps> = ({
@@ -28,9 +29,8 @@ const TaskItem: FC<TaskItemProps> = ({
   teachers,
   date,
   checkboxes,
-  description,
-  deadline,
   lessonId,
+  setCards
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const refObject = useRef(null);
@@ -55,6 +55,7 @@ const TaskItem: FC<TaskItemProps> = ({
         <div className={cls.subject}>{subject}</div>
       </div>
       <ModalTask
+        setCards={setCards}
         lessonId={lessonId}
         checkboxes={checkboxes}
         date={date}

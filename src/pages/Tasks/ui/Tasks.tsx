@@ -26,7 +26,7 @@ const Tasks = () => {
       {cards && (
         <section className={classNames(cls.tasks, {}, [])}>
           {cards.map((card) => {
-            return <Card key={card._id} date={new Date(card.date)} tasks={card.tasks} />;
+            return <Card setCards={setCards} key={card._id} date={new Date(card.date)} tasks={card.tasks} />;
           })}
         </section>
       )}

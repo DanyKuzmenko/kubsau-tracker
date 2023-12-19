@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-import { GroupType } from '../../features/SearchInput/ui/SearchInput';
+import { GroupType } from 'features/SearchInput/ui/SearchInput';
 import { CheckboxType, TeacherType } from '../types/types';
-import { logDOM } from '@testing-library/react';
 
 const baseUrl = 'http://it2003.kubsau.ru/api/';
 
@@ -84,13 +83,16 @@ export const createCheckbox = async (title: string, lessonId: string) => {
   return response.data;
 };
 export const patchCheckbox = async (id: string, title: string, isDone: boolean) => {
-  let response = await instance.patch(`tasks/checkbox`, {
+  let response = await instance.patch(`tasks/checkbox/` + id, {
     title: title,
     isDone: isDone,
   });
   return response.data;
 };
-
+export const deleteCheckbox = async (id: string) => {
+  let response = await instance.delete(`tasks/checkbox/` + id);
+  return response.data;
+}
 type TaskType = {
   title: string;
   subject: string;

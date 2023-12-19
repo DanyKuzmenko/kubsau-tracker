@@ -6,12 +6,20 @@ interface CheckBoxProps {
   className?: string;
   isDone: boolean;
   disabled?: boolean;
+  checked?: boolean
+  setIsChecked?: (bool: boolean) => void;
+  checkBoxClick?: () => void
 }
 
-const CheckBox: FC<CheckBoxProps> = ({ isDone, disabled }) => {
+const CheckBox: FC<CheckBoxProps> = ({ disabled, checked,setIsChecked , checkBoxClick}) => {
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+    checkBoxClick()
+
+  };
   return (
     <label className={cls.customCheckbox}>
-      <input disabled={disabled} defaultChecked={isDone} type="checkbox" />
+      <input onChange={handleCheckboxChange} checked={checked} disabled={disabled} type="checkbox" />
       <div className={cls.checkbox}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
