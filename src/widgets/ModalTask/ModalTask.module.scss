@@ -45,7 +45,7 @@
 }
 .deadline {
   padding: 12px 16px;
-  background: rgba(7, 7, 6, 0.12);
+  background: $bg_secondary_default;
   border-radius: 12px;
   display: inline-flex;
   flex-direction: column;
@@ -232,5 +232,14 @@ button.deleteButton {
     left: unset;
     margin-top: 24px;
     bottom: unset;
+    gap: 10px;
+  }
+
+  button.deleteButton {
+    padding: 10px;
+  }
+
+  button.saveButton {
+    padding: 10px;
   }
 }

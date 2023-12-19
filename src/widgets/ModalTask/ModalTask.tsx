@@ -171,46 +171,49 @@ const ModalTask: FC<ModalTaskProps> = ({
           </div>
         </div>
 
-        <div className={cls.checkboxes}>
-          <h2 className={cls.checkboxesHeader}>Чекбоксы</h2>
-          <div className={cls.checkboxesBody}>
-            {taskData &&
-              taskData.checkboxes &&
-              taskData.checkboxes.length > 0 &&
-              taskData.checkboxes.map((item) => {
-                return <TaskModalCheckbox lessonId={lessonId} setTaskData={setTaskData} checkboxId={item._id} key={item._id} title={item.title} isDone={item.isDone} />;
-              })}
-            {checkboxEditMode ? (
-              <input
-                className={cls.checkboxesInput}
-                ref={checkboxInput}
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onBlur={() => setCheckboxEditMode(false)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleAddCheckbox();
-                  }
-                }}
-              />
-            ) : taskData ? (
-              <Button
-                onClick={() => {
-                  setCheckboxEditMode(true);
-                }}
-                className={cls.checkboxesButton}
-                theme={ButtonTheme.ICON}
-                size={ButtonSize.S}
-              >
-                <img src={plusIcon} alt={'Добавить.'} />
-                Добавить
-              </Button>
-            ) : (
-              <></>
-            )}
+        {!taskCreateMode && (
+          <div className={cls.checkboxes}>
+            <h2 className={cls.checkboxesHeader}>Чекбоксы</h2>
+            <div className={cls.checkboxesBody}>
+              {taskData &&
+                taskData.checkboxes &&
+                taskData.checkboxes.length > 0 &&
+                taskData.checkboxes.map((item) => {
+                  return <TaskModalCheckbox lessonId={lessonId} setTaskData={setTaskData} checkboxId={item._id} key={item._id} title={item.title} isDone={item.isDone} />;
+                })}
+              {checkboxEditMode ? (
+                <input
+                  className={cls.checkboxesInput}
+                  ref={checkboxInput}
+                  type='text'
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onBlur={() => setCheckboxEditMode(false)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddCheckbox();
+                    }
+                  }}
+                />
+              ) : taskData ? (
+                <Button
+                  onClick={() => {
+                    setCheckboxEditMode(true);
+                  }}
+                  className={cls.checkboxesButton}
+                  theme={ButtonTheme.ICON}
+                  size={ButtonSize.S}
+                >
+                  <img src={plusIcon} alt={'Добавить.'} />
+                  Добавить
+                </Button>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
-        </div>
+        )}
+
         <div className={cls.description}>
           <h2 className={cls.descriptionHeader}>Описание</h2>
           {taskData && taskData.description && !taskCreateMode ? (
@@ -243,7 +246,7 @@ const ModalTask: FC<ModalTaskProps> = ({
         </>
 
         <div onClick={closeModal} className={cls.modalClose}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <path
               d="M9.40032 7.51472L16 14.1144L22.5996 7.51472L24.4853 9.40034L17.8856 16L24.4853 22.5997L22.5996 24.4853L16 17.8856L9.40032 24.4853L7.5147 22.5997L14.1144 16L7.5147 9.40034L9.40032 7.51472Z"
               fill="#9DA09C"
