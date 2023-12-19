@@ -20,37 +20,37 @@ export const createWeek = (nextWeek: boolean) => {
           number: 1,
           timeStart: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8, 0),
           timeEnd: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 9, 30),
-          isLecture: true
+          isLecture: true,
         },
         {
           number: 2,
           timeStart: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 9, 45),
           timeEnd: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 15),
-          isLecture: true
+          isLecture: true,
         },
         {
           number: 3,
           timeStart: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 11, 30),
           timeEnd: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 13, 0),
-          isLecture: false
+          isLecture: false,
         },
         {
           number: 4,
           timeStart: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 13, 50),
           timeEnd: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 15, 20),
-          isLecture: false
+          isLecture: false,
         },
         {
           number: 5,
           timeStart: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 15, 35),
           timeEnd: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 5),
-          isLecture: false
+          isLecture: false,
         },
         {
           number: 6,
           timeStart: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 20),
           timeEnd: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 50),
-          isLecture: true
+          isLecture: true,
         },
       ],
       tasks: [
@@ -63,9 +63,8 @@ export const createWeek = (nextWeek: boolean) => {
           title: 'Лабораторная работа №4 (1-2, 5-7)',
           subject: 'Технологии облачных вычислений',
           isDone: true,
-        }
-
-      ]
+        },
+      ],
     });
 
     today.setDate(today.getDate() + 1);

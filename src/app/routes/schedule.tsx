@@ -1,7 +1,7 @@
 import { Schedule } from 'pages/Schedule';
 
 export const scheduleRoutes = {
-  schedule: '/schedule',
+  schedule: '/',
 };
 
 export const scheduleBrowserRoutes = [

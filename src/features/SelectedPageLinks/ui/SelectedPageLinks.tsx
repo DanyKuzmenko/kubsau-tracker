@@ -6,22 +6,17 @@ import { classNames } from 'shared/lib/classNames';
 
 import cls from './SelectedPageLinks.module.scss';
 
-
 export enum Pages {
-    SCHEDULE = 'schedule',
-    TASKS = 'tasks'
+  SCHEDULE = 'schedule',
+  TASKS = 'tasks',
 }
 interface SelectedPageLinksProps {
-    selectedPage: Pages
+  selectedPage: Pages;
 }
 
-
-
-const SelectedPageLinks: FC<SelectedPageLinksProps> = ({selectedPage}) => {
-
+const SelectedPageLinks: FC<SelectedPageLinksProps> = ({ selectedPage }) => {
   const isScheduleActive = selectedPage === 'schedule';
   const isTasksActive = selectedPage === 'tasks';
-
 
   return (
     <div className={cls.selectedPageLinks}>

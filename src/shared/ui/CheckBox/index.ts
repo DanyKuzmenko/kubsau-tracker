@@ -1,1 +1,1 @@
-export {CheckBox} from './ui/CheckBox'
+export { CheckBox } from './ui/CheckBox';

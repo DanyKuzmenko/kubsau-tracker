@@ -5,10 +5,12 @@ export function classNames(cls: string, mods: Mods = {}, additional: string[] = 
     cls,
     ...additional,
     Object.entries(mods)
-        .filter(([_, value]) => {
-          return !!value;
-        })
-        .map(([classNames]) => classNames).join(' ')
+      .filter(([_, value]) => {
+        return !!value;
+      })
+      .map(([classNames]) => classNames)
+      .join(' '),
   ]
-      .join(' ').trim();
+    .join(' ')
+    .trim();
 }

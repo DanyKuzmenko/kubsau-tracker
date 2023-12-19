@@ -65,16 +65,15 @@ const ModalTask: FC<ModalTaskProps> = ({
     if (!inputValue.trim()) {
       return;
     }
-    createCheckbox(checkboxInput.current.value, lessonId).then(res => {
-      setTaskData(prevState => {
-        return {...prevState, checkboxes: res.checkboxes}
-      })
-    })
+    createCheckbox(checkboxInput.current.value, lessonId).then((res) => {
+      setTaskData((prevState) => {
+        return { ...prevState, checkboxes: res.checkboxes };
+      });
+    });
     console.log('taskData', taskData);
   };
   const handleSubmit = () => {
     setTaskEditMode(false);
-
 
     const task = {
       title: titleInput.current?.value ? titleInput.current.value : taskData?.title,
@@ -87,13 +86,11 @@ const ModalTask: FC<ModalTaskProps> = ({
     };
     taskData
       ? patchTask(lessonId, task).then((res) => {
-          setTaskData(res)
+          setTaskData(res);
         })
-      :
-        createTask(date, { ...task, checkboxes: checkboxes }).then((res) => {
-          setTaskData(res)
+      : createTask(date, { ...task, checkboxes: checkboxes }).then((res) => {
+          setTaskData(res);
         });
-
   };
   const closeModal = () => {
     setIsVisible(false);
@@ -127,7 +124,7 @@ const ModalTask: FC<ModalTaskProps> = ({
               <input
                 ref={deadlineInput}
                 placeholder={
-                taskData?.deadline
+                  taskData?.deadline
                     ? new Date(taskData.deadline)?.toLocaleDateString('ru', {
                         day: '2-digit',
                         month: '2-digit',
@@ -160,7 +157,8 @@ const ModalTask: FC<ModalTaskProps> = ({
         <div className={cls.checkboxes}>
           <h2 className={cls.checkboxesHeader}>Чекбоксы</h2>
           <div className={cls.checkboxesBody}>
-            {taskData && taskData.checkboxes &&
+            {taskData &&
+              taskData.checkboxes &&
               taskData.checkboxes.length > 0 &&
               taskData.checkboxes.map((item) => {
                 return <TaskModalCheckbox key={item._id} title={item.title} isDone={item.isDone} />;

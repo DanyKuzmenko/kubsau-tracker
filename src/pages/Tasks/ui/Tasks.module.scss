@@ -1,18 +1,18 @@
 .tasks {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    width: 100%;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 100%;
 }
-@media screen and (max-width: 1200px){
-    .tasks {
-        padding: 0 75px;
-    }
+@media screen and (max-width: 1200px) {
+  .tasks {
+    padding: 0 75px;
+  }
 }
-@media screen and (max-width: 768px){
-    .tasks {
-        padding: 0;
-    }
+@media screen and (max-width: 768px) {
+  .tasks {
+    padding: 0;
+  }
 }
