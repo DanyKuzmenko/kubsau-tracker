@@ -25,22 +25,24 @@
 .TaskModalCheckbox:hover {
   color: #151615;
 }
-.TaskModalCheckbox:hover .svgContainer {
-  //opacity: 1;
-}
 .checkboxEditor {
   width: 100%;
   height: 24px;
+  border: none;
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .checkboxEditorContainer{
   width: 100%;
+  display: flex;
+  gap: 20px;
+
 }
-.checkboxEditorSave {
-  position: absolute;
+button.checkboxEditorSave {
   right: 0;
   top: 0;
   background: none;
+  border: none;
+}
+button.checkboxEditorSave:hover {
   border: none;
 }

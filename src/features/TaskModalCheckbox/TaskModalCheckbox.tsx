@@ -1,28 +1,75 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
 import { classNames } from 'shared/lib/classNames/classNames';
+import { Button, ButtonTheme } from 'shared/ui/Button';
 import { CheckBox } from 'shared/ui/CheckBox';
 
 import cls from './TaskModalCheckbox.module.scss';
+import { deleteCheckbox, getTasksById, patchCheckbox } from 'app/api/api';
+import { TaskType } from 'app/types/types';
 
 interface TaskModalCheckboxProps {
   className?: string;
   title: string;
   isDone: boolean;
+  checkboxId: string;
+  setTaskData: (tasks: TaskType) => void
+  lessonId: string
 }
 
-const TaskModalCheckbox: FC<TaskModalCheckboxProps> = ({ className, isDone, title }) => {
+const TaskModalCheckbox: FC<TaskModalCheckboxProps> = ({lessonId, className, isDone,
+                                                         title, checkboxId,setTaskData }) => {
   const [editMode, setEditMode] = useState(false);
+  const [isDoneState, setIsDoneState] = useState<boolean>(isDone);
+  const inputRef = useRef(null);
+  const [titleState, setTitleState] = useState(title);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [editMode]);
+  const handleSaveChanges = () => {
+    if (!inputRef.current?.value.trim()) {
+      setEditMode(false)
+      return
+    }
+    patchCheckbox(checkboxId, inputRef.current?.value, isDoneState).then(res => {
+      setIsDoneState(res.isDone);
+      setTitleState(res.title);
+      console.log(res)
+    })
+  }
+  const checkBoxClick = () => {
+    patchCheckbox(checkboxId, titleState, !isDoneState).then(res => {
+      setIsDoneState(res.isDone);
+      setTitleState(res.title);
+    })
+  }
+  const handleDelete = () => {
+    deleteCheckbox(checkboxId).then((res) => {
+    }).catch(er => {
+      console.log(er);
+    })
+    getTasksById(lessonId).then(res => {
+      setTaskData(res)
+    })
+  }
   return (
     <div className={classNames(cls.TaskModalCheckbox, {}, [className])}>
-      <CheckBox isDone={isDone} />
+      <CheckBox checkBoxClick={checkBoxClick} setIsChecked={setIsDoneState} checked={isDoneState} isDone={isDone} />
       {editMode ? (
         <div className={cls.checkboxEditorContainer}>
-          <input className={cls.checkboxEditor} type="text" />
-          <button className={cls.checkboxEditorSave}>Сохранить</button>
+          <input
+            ref={inputRef}
+            onBlur={() => {
+              setTimeout(() => setEditMode(false), 150);
+            }}
+
+            placeholder={'Введите название чекбокса'}
+            className={cls.checkboxEditor}
+            type="text" />
+          <Button onClick={handleSaveChanges} theme={ButtonTheme.SECONDARY} className={cls.checkboxEditorSave}>Сохранить</Button>
         </div>
       ) : (
-        <div className={cls.title}> {title} </div>
+        <div className={cls.title}> {titleState} </div>
       )}
       {
         !editMode && <div className={cls.svgContainer}>
@@ -34,7 +81,7 @@ const TaskModalCheckbox: FC<TaskModalCheckboxProps> = ({ className, isDone, titl
                 fill='#9DA09C' />
             </svg>
           </div>
-          <div className={cls.deleteCheckbox}>
+          <div className={cls.deleteCheckbox} onClick={handleDelete}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <rect width="24" height="24" fill="white" />
               <path

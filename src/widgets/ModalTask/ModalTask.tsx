@@ -1,7 +1,7 @@
 import React, { FC, RefObject, useEffect, useRef, useState } from 'react';
 
-import { createCheckbox, createTask, deleteTask, getTasksById, patchCheckbox, patchTask } from 'app/api/api';
-import { CheckboxType, TaskType, TeacherType } from 'app/types/types';
+import { createCheckbox, createTask, deleteTask, getTasks, getTasksById, patchCheckbox, patchTask } from 'app/api/api';
+import { CheckboxType, TaskCardType, TaskType, TeacherType } from 'app/types/types';
 import { TaskModalCheckbox } from 'features/TaskModalCheckbox/TaskModalCheckbox';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/ui/Button';
@@ -20,9 +20,11 @@ interface ModalTaskProps {
   date: Date;
   checkboxes?: CheckboxType[];
   lessonId: string;
+  setCards?: (cards: TaskCardType[]) => void
 }
 
 const ModalTask: FC<ModalTaskProps> = ({
+  setCards,
   className,
   teachers,
   subject,
@@ -69,16 +71,17 @@ const ModalTask: FC<ModalTaskProps> = ({
   };
   const handleDelete = (lessonId: string, date: Date) => {
     deleteTask(lessonId, date).then((res) => {
-      if (res.status === 200) {
-        setIsVisible(false);
-      }
+    }).then(res => {
+      setIsVisible(false);
+      getTasks().then(res => {
+        setCards(res)
+      })
     });
   };
   const handleSubmit = () => {
     setTaskCreateMode(false);
     const handleCheckboxChange = (id: string, title: string, isDone: boolean) => {
       patchCheckbox(id, title, isDone).then((res) => {
-        console.log(res);
       });
     };
 
@@ -175,7 +178,7 @@ const ModalTask: FC<ModalTaskProps> = ({
                 taskData.checkboxes &&
                 taskData.checkboxes.length > 0 &&
                 taskData.checkboxes.map((item) => {
-                  return <TaskModalCheckbox key={item._id} title={item.title} isDone={item.isDone} />;
+                  return <TaskModalCheckbox lessonId={lessonId} setTaskData={setTaskData} checkboxId={item._id} key={item._id} title={item.title} isDone={item.isDone} />;
                 })}
               {checkboxEditMode ? (
                 <input

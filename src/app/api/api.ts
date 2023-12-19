@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-import { GroupType } from '../../features/SearchInput/ui/SearchInput';
+import { GroupType } from 'features/SearchInput/ui/SearchInput';
 import { CheckboxType, TeacherType } from '../types/types';
-import { logDOM } from '@testing-library/react';
 
 const baseUrl = 'http://it2003.kubsau.ru/api/';
 
@@ -36,8 +35,6 @@ export const getTasksById = async (id: string) => {
   return response.data;
 };
 export const createTask = async (date: Date, task: TaskType) => {
-  console.log('date', date);
-  console.log('task', task);
 
   let response = await instance.post(`tasks`, {
     date: date,
@@ -70,7 +67,7 @@ export const patchTask = async (id: string, task: TaskType) => {
 export const deleteTask = async (lessonID: string, date: Date) => {
   return await instance.delete(`tasks/` + lessonID, {
     data: {
-      date: date,
+      date: date.toLocaleDateString('en'),
     },
   });
 };
@@ -84,13 +81,16 @@ export const createCheckbox = async (title: string, lessonId: string) => {
   return response.data;
 };
 export const patchCheckbox = async (id: string, title: string, isDone: boolean) => {
-  let response = await instance.patch(`tasks/checkbox`, {
+  let response = await instance.patch(`tasks/checkbox/` + id, {
     title: title,
     isDone: isDone,
   });
   return response.data;
 };
-
+export const deleteCheckbox = async (id: string) => {
+  let response = await instance.delete(`tasks/checkbox/` + id);
+  return response.data;
+}
 type TaskType = {
   title: string;
   subject: string;
