@@ -6,6 +6,7 @@ import { TaskModalCheckbox } from 'features/TaskModalCheckbox/TaskModalCheckbox'
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/ui/Button';
 import { CheckBox } from 'shared/ui/CheckBox';
+import plusIcon from 'assets/images/plusIcon.svg';
 
 import cls from './ModalTask.module.scss';
 
@@ -80,12 +81,19 @@ const ModalTask: FC<ModalTaskProps> = ({
         console.log(res);
       });
     };
+
+    const dateParts = deadlineInput.current.value.split('.');
+
+    const day = parseInt(dateParts[0], 10); // Преобразование дня в число
+    const month = parseInt(dateParts[1], 10) - 1; // Преобразование месяца в число (нумерация месяцев начинается с 0)
+    const year = parseInt(dateParts[2], 10);
+
     const task = {
       title: titleInput.current?.value ? titleInput.current.value : taskData?.title,
       subject: subject,
       teachers: teachers,
       isDone: false,
-      deadline: deadlineInput.current?.value ? new Date(deadlineInput.current.value) : new Date(taskData?.deadline),
+      deadline: deadlineInput.current?.value ? new Date(year, month, day) : new Date(taskData?.deadline),
       description: descriptionInput.current?.value ? descriptionInput.current.value : taskData?.description,
       lessonId: lessonId,
     };
@@ -188,9 +196,10 @@ const ModalTask: FC<ModalTaskProps> = ({
                   setCheckboxEditMode(true);
                 }}
                 className={cls.checkboxesButton}
-                theme={ButtonTheme.SECONDARY}
+                theme={ButtonTheme.ICON}
                 size={ButtonSize.S}
               >
+                <img src={plusIcon} alt={'Добавить.'} />
                 Добавить
               </Button>
             ) : (
@@ -212,22 +221,22 @@ const ModalTask: FC<ModalTaskProps> = ({
           )}
         </div>
 
-        <div>
+        <>
           {taskCreateMode ? (
             <Button className={cls.saveDeleteButton} onClick={handleSubmit} theme={ButtonTheme.PRIMARY}>
               Сохранить
             </Button>
           ) : (
             <div className={cls.saveDeleteButton}>
-              <Button onClick={() => setTaskCreateMode(true)} theme={ButtonTheme.PRIMARY} className={cls.saveButton}>
-                Редактировать
-              </Button>
               <button className={cls.deleteButton} onClick={() => handleDelete(lessonId, date)}>
                 Удалить
               </button>
+              <Button onClick={() => setTaskCreateMode(true)} theme={ButtonTheme.PRIMARY} className={cls.saveButton}>
+                Редактировать
+              </Button>
             </div>
           )}
-        </div>
+        </>
 
         <div onClick={closeModal} className={cls.modalClose}>
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

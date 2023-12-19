@@ -9,8 +9,10 @@
 }
 .svgContainer {
   position: absolute;
-  opacity: 0;
+  //opacity: 0;
   right: 0;
+  display: flex;
+  gap: 10px;
 }
 .editCheckbox {
   display: inline;
@@ -24,7 +26,7 @@
   color: #151615;
 }
 .TaskModalCheckbox:hover .svgContainer {
-  opacity: 1;
+  //opacity: 1;
 }
 .checkboxEditor {
   width: 100%;

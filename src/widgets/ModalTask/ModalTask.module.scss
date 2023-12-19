@@ -7,9 +7,9 @@
   top: 36px;
 
   left: calc(50% - (var(--window-width) / 2));
-  padding: 40px 44px 100px 44px;
+  padding: 40px 44px;
   border-radius: 24px;
-  min-height: calc(100% - 144px);
+  //min-height: calc(100% - 144px);
 }
 .visible {
   display: block;
@@ -116,17 +116,20 @@
   border-radius: 8px;
 }
 button.checkboxesButton {
-  max-width: 200px;
-  padding: 10px 20px;
-  margin-top: 10px;
+  display: flex;
+  align-self: start;
+  gap: 10px;
+  padding: 0;
 }
 .saveDeleteButton {
   display: flex;
+  gap: 24px;
   align-items: stretch;
   justify-content: center;
-  width: 400px;
-  padding: 10px 20px;
-  position: absolute;
+  width: 100%;
+  //width: 400px;
+  padding: 10px 0;
+  //position: absolute;
   bottom: 30px;
   left: calc(50% - 200px);
 }
@@ -134,18 +137,21 @@ button.checkboxesButton {
   padding: 10px 40px;
 }
 .saveButton {
-  width: 70%;
+  width: 100%;
 }
 button.deleteButton {
-  background: $error-stroke;
-  border: none;
   cursor: pointer;
-  width: 30%;
   padding: 0;
   transition-duration: 0.2s;
+  border: 1px solid #E31B1B;
+  color: #E31B1B;
+  background-color: unset;
+  width: 100%;
 }
 .deleteButton:hover {
-  background: $danger_hover;
+  background-color: #E31B1B;
+  border: 1px solid #B90C0C;
+  color: $bg_primary;
 }
 .checkboxesInput {
   border: none;
@@ -157,7 +163,7 @@ button.deleteButton {
 @media screen and (max-width: 1180px) {
   .ModalTask {
     --window-width: 70vw;
-    padding: 26px 70px 100px 32px;
+    padding: 26px 32px 26px 32px;
   }
   .title {
     font-size: 24px;
@@ -180,33 +186,51 @@ button.deleteButton {
     font-size: 14px;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .ModalTask {
+    --window-width: 85vw;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .ModalTask {
-    padding: 12px 50px 80px 12px;
+    padding: 20px;
+    min-height: unset;
   }
   .title {
     font-size: 16px;
   }
+
+  .windowHeader {
+    padding-right: 30px;
+  }
+
   .titleInput::placeholder {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
   }
   .subjectHeader,
   .descriptionHeader,
   .checkboxesHeader,
   .teacherHeader {
-    font-size: 12px;
+    font-size: 14px;
   }
   .subjectName,
   .teacherName,
   .checkboxes {
-    font-size: 14px;
+    font-size: 16px;
   }
   .deadline {
-    font-size: 12px;
+    font-size: 14px;
   }
+
   .saveDeleteButton {
     padding: 10px 20px;
-    --btn-width: 60%;
+    width: 100%;
+    position: relative;
+    left: unset;
+    margin-top: 24px;
+    bottom: unset;
   }
 }

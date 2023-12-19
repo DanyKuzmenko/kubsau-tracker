@@ -46,6 +46,14 @@
   }
 }
 
+.icon {
+  color: $accent_default;
+
+  &:hover {
+    color: $accent_hover;
+  }
+}
+
 .xs {
   font-size: 14px;
   padding: 6px 20px;
