@@ -1,4 +1,4 @@
-import React, { FC, KeyboardEvent, useEffect, useState } from 'react';
+import React, { FC, KeyboardEvent, MouseEventHandler, useEffect, useState } from 'react';
 
 import { getGroupById, getGroups } from 'app/api/api';
 import { ScheduleData } from 'app/types/types';
@@ -65,20 +65,42 @@ const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputVal
       setSuggestions(null);
     }
   };
-  const handleButtonClick = async () => {
-    const filtered = groups.filter(({ id, name }) => name === inputValue.toUpperCase());
-    if (filtered.length === 0) {
-      setInputValue('');
-      return;
+  const handleButtonClick = async (searchName?: string) => {
+    if (!searchName) {
+      const filtered = groups.filter(({ id, name }) => name === inputValue.toUpperCase());
+      if (filtered.length === 0) {
+        setInputValue('');
+        return;
+      }
+
+      let res: ScheduleData;
+      setIsFetching(true);
+
+      res = await getGroupById(filtered[0].id);
+
+      setIsFetching(false);
+      setClassesInfo(res);
+    } else {
+      const filtered = groups.filter(({ id, name }) => name === searchName.toUpperCase());
+      if (filtered.length === 0) {
+        setInputValue('');
+        return;
+      }
+
+      let res: ScheduleData;
+      setIsFetching(true);
+
+      res = await getGroupById(filtered[0].id);
+
+      setIsFetching(false);
+      setClassesInfo(res);
     }
+  };
 
-    let res: ScheduleData;
-    setIsFetching(true);
-
-    res = await getGroupById(filtered[0].id);
-
-    setIsFetching(false);
-    setClassesInfo(res);
+  const handleSuggestionsClick = async (item: { id: string; name: string }): Promise<void> => {
+    setInputValue(item.name)
+    setSuggestions(null);
+    await handleButtonClick(item.name);
   };
 
   return (
@@ -94,7 +116,7 @@ const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputVal
             placeholder={searchType === 'rooms' ? 'Искать по аудитории' : 'Искать по группе'}
           />
           {!isFetching ? (
-            <Button onClick={handleButtonClick} theme={ButtonTheme.PRIMARY} className={cls.button}>
+            <Button onClick={() => handleButtonClick()} theme={ButtonTheme.PRIMARY} className={cls.button}>
               <img src={searchIcon} alt={'Поиск.'} />
             </Button>
           ) : (
@@ -108,10 +130,7 @@ const SearchInput: FC<SearchInputProps> = ({ searchType, inputValue, setInputVal
                 suggestions.map((item) => {
                   return (
                     <div
-                      onClick={() => {
-                        setSuggestions(null);
-                        setInputValue(item.name);
-                      }}
+                      onClick={() => handleSuggestionsClick(item)}
                       className={cls.suggestionItem}
                       key={item.name}
                     >

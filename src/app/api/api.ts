@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { GroupType } from '../../features/SearchInput/ui/SearchInput';
 import { CheckboxType, TeacherType } from '../types/types';
+import { logDOM } from '@testing-library/react';
 
 const baseUrl = 'http://it2003.kubsau.ru/api/';
 
@@ -35,6 +36,9 @@ export const getTasksById = async (id: string) => {
   return response.data;
 };
 export const createTask = async (date: Date, task: TaskType) => {
+  console.log('date', date);
+  console.log('task', task);
+
   let response = await instance.post(`tasks`, {
     date: date,
     task: {
@@ -92,7 +96,7 @@ type TaskType = {
   subject: string;
   teachers: TeacherType[];
   isDone: boolean;
-  deadline: Date;
+  deadline: Date | string;
   description: string;
   checkboxes?: CheckboxType[];
   lessonId: string;

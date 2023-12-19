@@ -8,6 +8,7 @@ export enum ButtonTheme {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
+  ICON = 'icon',
 }
 export enum ButtonSize {
   XS = 'xs',

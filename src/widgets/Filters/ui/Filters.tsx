@@ -22,6 +22,7 @@ type Props = {
 
 const Filters = ({ selectedPage, searchType, setSearchType, week, setWeek, setClassesInfo, classesInfo }: Props) => {
   const [inputValue, setInputValue] = useState<string>('');
+
   return (
     <section className={cls.filters}>
       <SelectedPageLinks selectedPage={selectedPage} />
