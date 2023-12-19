@@ -35,8 +35,6 @@ export const getTasksById = async (id: string) => {
   return response.data;
 };
 export const createTask = async (date: Date, task: TaskType) => {
-  console.log('date', date);
-  console.log('task', task);
 
   let response = await instance.post(`tasks`, {
     date: date,
@@ -69,7 +67,7 @@ export const patchTask = async (id: string, task: TaskType) => {
 export const deleteTask = async (lessonID: string, date: Date) => {
   return await instance.delete(`tasks/` + lessonID, {
     data: {
-      date: date,
+      date: date.toLocaleDateString('en'),
     },
   });
 };

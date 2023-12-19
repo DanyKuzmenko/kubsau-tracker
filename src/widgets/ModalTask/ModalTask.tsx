@@ -71,7 +71,7 @@ const ModalTask: FC<ModalTaskProps> = ({
   };
   const handleDelete = (lessonId: string, date: Date) => {
     deleteTask(lessonId, date).then((res) => {
-    }).catch(er => {
+    }).then(res => {
       setIsVisible(false);
       getTasks().then(res => {
         setCards(res)
@@ -82,7 +82,6 @@ const ModalTask: FC<ModalTaskProps> = ({
     setTaskCreateMode(false);
     const handleCheckboxChange = (id: string, title: string, isDone: boolean) => {
       patchCheckbox(id, title, isDone).then((res) => {
-        console.log(res);
       });
     };
 

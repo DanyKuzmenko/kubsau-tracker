@@ -19,7 +19,7 @@ interface TaskModalCheckboxProps {
 
 const TaskModalCheckbox: FC<TaskModalCheckboxProps> = ({lessonId, className, isDone,
                                                          title, checkboxId,setTaskData }) => {
-  const [editMode, setEditMode] = useState(isDone);
+  const [editMode, setEditMode] = useState(false);
   const [isDoneState, setIsDoneState] = useState<boolean>(isDone);
   const inputRef = useRef(null);
   const [titleState, setTitleState] = useState(title);
@@ -54,7 +54,7 @@ const TaskModalCheckbox: FC<TaskModalCheckboxProps> = ({lessonId, className, isD
   }
   return (
     <div className={classNames(cls.TaskModalCheckbox, {}, [className])}>
-      <CheckBox disabled={true} checkBoxClick={checkBoxClick} setIsChecked={setIsDoneState} checked={isDoneState} isDone={isDone} />
+      <CheckBox checkBoxClick={checkBoxClick} setIsChecked={setIsDoneState} checked={isDoneState} isDone={isDone} />
       {editMode ? (
         <div className={cls.checkboxEditorContainer}>
           <input
