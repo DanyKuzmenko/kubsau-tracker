@@ -13,11 +13,11 @@ export const routes = {
 export const browserRoutes = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout/>,
+    element: <MainLayout />,
     children: [...scheduleBrowserRoutes, ...tasksBrowserRoutes],
   },
   {
     path: '*',
-    element: <PageNotFound/>,
+    element: <PageNotFound />,
   },
 ]);

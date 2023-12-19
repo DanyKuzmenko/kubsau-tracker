@@ -1,5 +1,4 @@
-@import "src/app/styles";
-
+@import 'src/app/styles';
 
 .ModalTask {
   --window-width: 900px;
@@ -26,7 +25,6 @@
 }
 .windowHeader {
   display: flex;
-
 }
 .title {
   font-size: 32px;
@@ -65,7 +63,10 @@
 .deadlineInput::placeholder {
   font-size: 16px;
 }
-.subject, .teacher, .description, .checkboxes {
+.subject,
+.teacher,
+.description,
+.checkboxes {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -84,22 +85,17 @@
 .deadlineHeader {
   font-size: 14px;
   font-weight: 400;
-  color: $text_secondary_default
+  color: $text_secondary_default;
 }
-
 
 .subjectHeader,
 .descriptionHeader,
 .checkboxesHeader,
-.teacherHeader{
- color: $text_secondary_default;
+.teacherHeader {
+  color: $text_secondary_default;
   font-size: 16px;
   font-weight: 400;
 }
-
-
-
-
 
 .subjectName,
 .teacherName {
@@ -124,14 +120,32 @@ button.checkboxesButton {
   padding: 10px 20px;
   margin-top: 10px;
 }
-button.saveButton {
-  --btn-width: 400px;
+.saveDeleteButton {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 400px;
   padding: 10px 20px;
-  width: var(--btn-width);
   position: absolute;
   bottom: 30px;
-  left: calc(50% - (var(--btn-width) / 2));
-
+  left: calc(50% - 200px);
+}
+.saveDeleteButton button {
+  padding: 10px 40px;
+}
+.saveButton {
+  width: 70%;
+}
+button.deleteButton {
+  background: $error-stroke;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  padding: 0;
+  transition-duration: 0.2s;
+}
+.deleteButton:hover {
+  background: $danger_hover;
 }
 .checkboxesInput {
   border: none;
@@ -155,7 +169,7 @@ button.saveButton {
   .subjectHeader,
   .descriptionHeader,
   .checkboxesHeader,
-  .teacherHeader{
+  .teacherHeader {
     font-size: 14px;
   }
   .subjectName,
@@ -165,10 +179,6 @@ button.saveButton {
   .deadline {
     font-size: 14px;
   }
-}
-button.saveButton {
-  padding: 10px 20px;
-  --btn-width: 300px;
 }
 @media screen and (max-width: 600px) {
   .ModalTask {
@@ -184,7 +194,7 @@ button.saveButton {
   .subjectHeader,
   .descriptionHeader,
   .checkboxesHeader,
-  .teacherHeader{
+  .teacherHeader {
     font-size: 12px;
   }
   .subjectName,
@@ -195,9 +205,8 @@ button.saveButton {
   .deadline {
     font-size: 12px;
   }
-  button.saveButton {
+  .saveDeleteButton {
     padding: 10px 20px;
     --btn-width: 60%;
   }
-
 }

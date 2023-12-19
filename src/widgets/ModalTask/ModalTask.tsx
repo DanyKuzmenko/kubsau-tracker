@@ -1,6 +1,6 @@
 import React, { FC, RefObject, useEffect, useRef, useState } from 'react';
 
-import { createCheckbox, createTask, deleteTask, getTasksById, patchTask } from 'app/api/api';
+import { createCheckbox, createTask, deleteTask, getTasksById, patchCheckbox, patchTask } from 'app/api/api';
 import { CheckboxType, TaskType, TeacherType } from 'app/types/types';
 import { TaskModalCheckbox } from 'features/TaskModalCheckbox/TaskModalCheckbox';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -32,7 +32,7 @@ const ModalTask: FC<ModalTaskProps> = ({
   checkboxes,
   lessonId,
 }) => {
-  const [taskEditMode, setTaskEditMode] = useState(false);
+  const [taskCreateMode, setTaskCreateMode] = useState(false);
   const [checkboxEditMode, setCheckboxEditMode] = useState(false);
   const checkboxInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const titleInput: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -40,7 +40,7 @@ const ModalTask: FC<ModalTaskProps> = ({
   const descriptionInput: RefObject<HTMLTextAreaElement> = useRef<HTMLTextAreaElement>(null);
   const [inputValue, setInputValue] = useState('');
   const [taskData, setTaskData] = useState<TaskType>();
-  const [hasFetched, setHasFetched] = useState(false);
+
   useEffect(() => {
     // Устанавливаем фокус при появлении инпута
     checkboxInput.current?.focus();
@@ -48,7 +48,7 @@ const ModalTask: FC<ModalTaskProps> = ({
   useEffect(() => {
     getTasksById(lessonId).then((res) => {
       if (!res) {
-        setTaskEditMode(true);
+        setTaskCreateMode(true);
       }
       setTaskData(res);
     });
@@ -59,20 +59,27 @@ const ModalTask: FC<ModalTaskProps> = ({
     if (!inputValue.trim()) {
       return;
     }
-    createCheckbox(checkboxInput.current.value, lessonId).then(res => {
-      setTaskData(prevState => {
-        return {...prevState, checkboxes: res.checkboxes}
-      })
-    })
+    createCheckbox(checkboxInput.current.value, lessonId).then((res) => {
+      setTaskData((prevState) => {
+        return { ...prevState, checkboxes: res.checkboxes };
+      });
+    });
     console.log('taskData', taskData);
   };
   const handleDelete = (lessonId: string, date: Date) => {
-    deleteTask(lessonId, date)
-  }
+    deleteTask(lessonId, date).then((res) => {
+      if (res.status === 200) {
+        setIsVisible(false);
+      }
+    });
+  };
   const handleSubmit = () => {
-    setTaskEditMode(false);
-
-
+    setTaskCreateMode(false);
+    const handleCheckboxChange = (id: string, title: string, isDone: boolean) => {
+      patchCheckbox(id, title, isDone).then((res) => {
+        console.log(res);
+      });
+    };
     const task = {
       title: titleInput.current?.value ? titleInput.current.value : taskData?.title,
       subject: subject,
@@ -84,24 +91,21 @@ const ModalTask: FC<ModalTaskProps> = ({
     };
     taskData
       ? patchTask(lessonId, task).then((res) => {
-          setTaskData(res)
+          setTaskData(res);
         })
-      :
-        createTask(date, { ...task, checkboxes: checkboxes }).then((res) => {
-          setTaskData(res)
+      : createTask(date, { ...task, checkboxes: checkboxes }).then((res) => {
+          setTaskData(res);
         });
-
   };
   const closeModal = () => {
     setIsVisible(false);
-
   };
   return (
     <div className={classNames(cls.ModalTask, { [cls.visible]: isVisible }, [className])}>
       <div className={cls.content}>
         <div className={cls.windowHeader}>
           <CheckBox isDone={isDone} />
-          {taskData && taskData.title && !taskEditMode ? (
+          {taskData && taskData.title && !taskCreateMode ? (
             <h1 className={cls.title}>{taskData.title}</h1>
           ) : (
             <input
@@ -114,7 +118,7 @@ const ModalTask: FC<ModalTaskProps> = ({
         <div className={cls.deadline}>
           <h2 className={cls.deadlineHeader}>Дедлайн</h2>
           <div>
-            {taskData && taskData.deadline && !taskEditMode ? (
+            {taskData && taskData.deadline && !taskCreateMode ? (
               new Date(taskData.deadline)?.toLocaleDateString('ru', {
                 day: 'numeric',
                 month: 'long',
@@ -125,7 +129,7 @@ const ModalTask: FC<ModalTaskProps> = ({
               <input
                 ref={deadlineInput}
                 placeholder={
-                taskData?.deadline
+                  taskData?.deadline
                     ? new Date(taskData.deadline)?.toLocaleDateString('ru', {
                         day: '2-digit',
                         month: '2-digit',
@@ -158,7 +162,8 @@ const ModalTask: FC<ModalTaskProps> = ({
         <div className={cls.checkboxes}>
           <h2 className={cls.checkboxesHeader}>Чекбоксы</h2>
           <div className={cls.checkboxesBody}>
-            {taskData && taskData.checkboxes &&
+            {taskData &&
+              taskData.checkboxes &&
               taskData.checkboxes.length > 0 &&
               taskData.checkboxes.map((item) => {
                 return <TaskModalCheckbox key={item._id} title={item.title} isDone={item.isDone} />;
@@ -195,7 +200,7 @@ const ModalTask: FC<ModalTaskProps> = ({
         </div>
         <div className={cls.description}>
           <h2 className={cls.descriptionHeader}>Описание</h2>
-          {taskData && taskData.description && !taskEditMode ? (
+          {taskData && taskData.description && !taskCreateMode ? (
             <div className={cls.descriptionBody}>{taskData.description}</div>
           ) : (
             <textarea
@@ -208,17 +213,19 @@ const ModalTask: FC<ModalTaskProps> = ({
         </div>
 
         <div>
-          {taskEditMode ? (
-            <div>
-              <Button onClick={handleSubmit} className={cls.saveButton} theme={ButtonTheme.PRIMARY}>
+          {taskCreateMode ? (
+            <Button className={cls.saveDeleteButton} onClick={handleSubmit} theme={ButtonTheme.PRIMARY}>
               Сохранить
             </Button>
-              <button onClick={() => handleDelete}>Удалить</button>
-            </div>
           ) : (
-            <Button onClick={() => setTaskEditMode(true)} theme={ButtonTheme.PRIMARY} className={cls.saveButton}>
-              Редактировать
-            </Button>
+            <div className={cls.saveDeleteButton}>
+              <Button onClick={() => setTaskCreateMode(true)} theme={ButtonTheme.PRIMARY} className={cls.saveButton}>
+                Редактировать
+              </Button>
+              <button className={cls.deleteButton} onClick={() => handleDelete(lessonId, date)}>
+                Удалить
+              </button>
+            </div>
           )}
         </div>
 
